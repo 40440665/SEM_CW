@@ -1,4 +1,4 @@
 FROM openjdk:latest
-COPY ./target/classes/com /tmp
+COPY ./target/CW-0.1.0.1.jar /tmp
 WORKDIR /tmp
-ENTRYPOINT ["java", "group2.SEM"]
+ENTRYPOINT ["java", "-jar", "CW-0.1.0.1.jar"]
