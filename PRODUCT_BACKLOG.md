@@ -1,4 +1,4 @@
-#Product Backlog – TEAM 2
+# Product Backlog – TEAM 2
 
 We have been asked by an organization to develop a system that allows an easy access to the population information on an SQL database provided by this organization. Making use of this database we are asked to generate different kinds of reports.
 
