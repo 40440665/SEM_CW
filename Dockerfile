@@ -1,4 +1,4 @@
 FROM openjdk:latest
-COPY ./target/CW-0.1.0.1.jar /tmp
+COPY ./target/seMethods-0.1.0.3-jar-with-dependencies.jar /tmp
 WORKDIR /tmp
-ENTRYPOINT ["java", "-jar", "CW-0.1.0.1.jar"]
+ENTRYPOINT ["java", "-jar", "seMethods-0.1.0.3-jar-with-dependencies.jar"]
