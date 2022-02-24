@@ -1,6 +1,6 @@
 # SEM_Demo
 
-Master Build  ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/Kevin-Sim/sem_2022_labs/A%20workflow%20for%20my%20Hello%20World%20App?style=flat-square)
+Master Build Status ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/40440665/SEM_CW/master-workflow)
 
 lab0444 Build  ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/Kevin-Sim/sem_2022_labs/A%20workflow%20for%20my%20Hello%20World%20App/lab03?style=flat-square)
 
