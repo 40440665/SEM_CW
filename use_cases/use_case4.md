@@ -1,4 +1,4 @@
-| USE CASE #                | 4 Produce a population report of all countries in the world defined by a user input   |
+| USE CASE #                | 4 Produce a population report of the top populated countries in the world defined by a user input   |
 |---------------------------|-----|
 | Goal in Context           |   As a software developer I want to take an input from the user (N) and create a country report on the top N populated countries in the world, to provide the organisation with easy access to population information. |
 | Scope & Level             | Company, Primary Task   |
