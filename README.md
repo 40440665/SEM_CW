@@ -8,7 +8,7 @@
 * 
 __License__ ![GitHub](https://img.shields.io/github/license/40440665/SEM_CW?style=plastic)
 
-![Releases](https://img.shields.io/github/release/40440665/SEM_CW?style=flat-square)
+__Release__ ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/40440665/SEM_CW?include_prereleases)
 
 
 ```
