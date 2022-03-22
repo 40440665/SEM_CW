@@ -13,7 +13,7 @@ public class App {
 
         //Connect to database
         if(args.length < 1){
-            Test.connect("db:3306", 30000);
+            Test.connect("localhost:33060", 30000);
         }else{
             Test.connect(args[0], Integer.parseInt(args[1]));
         }
@@ -414,6 +414,19 @@ public class App {
 
     public ArrayList<City> getNCitiesInACountry(int n, String country) {
         try {
+            //Check if n is 0
+            if (n == 0)
+            {
+                System.out.println("n is empty");
+                return null;
+            }
+
+            //Check if country is null
+            if (country == null)
+            {
+                System.out.println("Country is null");
+                return null;
+            }
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement

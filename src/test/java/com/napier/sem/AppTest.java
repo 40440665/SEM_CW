@@ -47,4 +47,16 @@ public class AppTest {
         cities.add(city);
         app.printCities(cities);
     }
+
+    @Test
+    void nPopulatedCitiesInCountryNis0()
+    {
+        app.getNCitiesInACountry(0, "France");
+    }
+
+    @Test
+    void nPopulatedCitiesInCountryNull()
+    {
+        app.getNCitiesInACountry(1,null);
+    }
 }
