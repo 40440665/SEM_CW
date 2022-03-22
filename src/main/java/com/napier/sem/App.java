@@ -47,7 +47,7 @@ public class App {
 
 
         //Display top N populated cities in a country
-        //ArrayList<City> cities = Test.getNCitiesInACountry();
+        ArrayList<City> cities = Test.getNCitiesInACountry(3, "France");
 
         //Print the cities
         Test.printCities(cities);
