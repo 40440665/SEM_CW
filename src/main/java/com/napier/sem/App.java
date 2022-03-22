@@ -22,28 +22,28 @@ public class App {
         //ArrayList<City> cities = Test.citiesByPopulation();
 
         // CITIES IN A CONTINENT
-        //ArrayList<City> cities = Test.getAllCitiesInAContinent();
+        //ArrayList<City> cities = Test.getAllCitiesInAContinent("Europe");
 
         //Display cities by district
-        //ArrayList<City> cities = Test.citiesByDistrict();
+        //ArrayList<City> cities = Test.citiesByDistrict("Balkh");
 
         //Display cities in a Region
-        //ArrayList<City> cities = Test.getAllCitiesInARegion();
+        //ArrayList<City> cities = Test.getAllCitiesInARegion("Caribbean");
 
         //Display cities in a Country
-        //ArrayList<City> cities = Test.getAllCitiesInACountry();
+        //ArrayList<City> cities = Test.getAllCitiesInACountry("France");
 
         //Display top N populated cities
-        //ArrayList<City> cities = Test.NPopulatedCities();
+        //ArrayList<City> cities = Test.NPopulatedCities(4);
 
         //Display top N populated cities in a continent
-        //ArrayList<City> cities = Test.getNCitiesInAContinent();
+        //ArrayList<City> cities = Test.getNCitiesInAContinent(3,"Europe");
 
         //Display top N populated cities in a region
-        //ArrayList<City> cities = Test.getNCitiesInARegion();
+        //ArrayList<City> cities = Test.getNCitiesInARegion(4, "Caribbean");
 
         //Display top N populated cities in a district
-        ArrayList<City> cities = Test.NPopulatedCitiesInADistrict();
+        //ArrayList<City> cities = Test.NPopulatedCitiesInADistrict(6, "California");
 
 
         //Display top N populated cities in a country
@@ -179,7 +179,7 @@ public class App {
 
 
     //Get cities in district and sort by population
-    public ArrayList<City> citiesByDistrict() {
+    public ArrayList<City> citiesByDistrict(String district) {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -187,7 +187,7 @@ public class App {
             String strSelect =
                     "SELECT Name, CountryCode, District, Population "
                             + " FROM city "
-                            + " WHERE District='Balkh' "
+                            + " WHERE District='"+district+"' "
                             + " ORDER BY Population DESC";
 
             // Execute SQL statement
@@ -196,6 +196,7 @@ public class App {
             ArrayList<City> cities = new ArrayList<City>();
             while (rset.next()) {
                 City city = new City();
+                city.ID = rset.getInt("ID");
                 city.Name = rset.getString("Name");
                 city.CountryCode = rset.getString("CountryCode");
                 city.District = rset.getString("District");
@@ -211,7 +212,7 @@ public class App {
     }
 
 
-    public ArrayList<City> getAllCitiesInAContinent() {
+    public ArrayList<City> getAllCitiesInAContinent(String continent) {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -220,7 +221,7 @@ public class App {
                     "SELECT city.Name, city.CountryCode, city.District, city.Population "
                             + "FROM city, country "
                             + "WHERE city.CountryCode = country.Code "
-                            + "AND country.continent = 'Europe' "
+                            + "AND country.continent = '" + continent + "' "
                             + "ORDER BY city.Population DESC";
 
             // Execute SQL statement
@@ -246,7 +247,7 @@ public class App {
 
 
     //Get top N populated cities in the world
-    public ArrayList<City> NPopulatedCities() {
+    public ArrayList<City> NPopulatedCities(int n) {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -255,7 +256,7 @@ public class App {
                     "SELECT Name, CountryCode, District, Population "
                             + " FROM city "
                             + " ORDER BY Population DESC "
-                            + " LIMIT 3";
+                            + " LIMIT "+n+"";
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -277,7 +278,7 @@ public class App {
         }
     }
 
-    public ArrayList<City> getAllCitiesInARegion() {
+    public ArrayList<City> getAllCitiesInARegion(String region) {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -286,7 +287,7 @@ public class App {
                     "SELECT city.Name, city.CountryCode, city.District, city.Population "
                             + "FROM city, country "
                             + "WHERE city.CountryCode = country.Code "
-                            + "AND country.Region = 'Caribbean' "
+                            + "AND country.Region = '"+region+"' "
                             + "ORDER BY city.Population DESC";
 
             // Execute SQL statement
@@ -310,7 +311,7 @@ public class App {
     }
 
 
-    public ArrayList<City> getAllCitiesInACountry() {
+    public ArrayList<City> getAllCitiesInACountry(String country) {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -319,7 +320,7 @@ public class App {
                     "SELECT city.Name, city.CountryCode, city.District, city.Population "
                             + "FROM city, country "
                             + "WHERE city.CountryCode = country.Code "
-                            + "AND country.Name = 'France' "
+                            + "AND country.Name = '"+country+"' "
                             + "ORDER BY city.Population DESC";
 
             // Execute SQL statement
@@ -342,7 +343,7 @@ public class App {
         }
     }
 
-    public ArrayList<City> getNCitiesInAContinent() {
+    public ArrayList<City> getNCitiesInAContinent(int n, String continent) {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -351,9 +352,9 @@ public class App {
                     "SELECT city.Name, city.CountryCode, city.District, city.Population "
                             + "FROM city, country "
                             + "WHERE city.CountryCode = country.Code "
-                            + "AND country.continent = 'Europe' "
+                            + "AND country.continent = '"+continent+"' "
                             + "ORDER BY city.Population DESC "
-                            + "LIMIT 3 ";
+                            + "LIMIT "+n+" ";
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -377,7 +378,7 @@ public class App {
 
 
 
-    public ArrayList<City> getNCitiesInARegion() {
+    public ArrayList<City> getNCitiesInARegion(int n, String region) {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -386,9 +387,9 @@ public class App {
                     "SELECT city.Name, city.CountryCode, city.District, city.Population "
                             + "FROM city, country "
                             + "WHERE city.CountryCode = country.Code "
-                            + "AND country.Region = 'Caribbean' "
+                            + "AND country.Region = '"+region+"' "
                             + "ORDER BY city.Population DESC "
-                            + "LIMIT 3 ";
+                            + "LIMIT "+n+" ";
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -411,7 +412,7 @@ public class App {
     }
 
 
-    public ArrayList<City> getNCitiesInACountry() {
+    public ArrayList<City> getNCitiesInACountry(int n, String country) {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -420,9 +421,9 @@ public class App {
                     "SELECT city.Name, city.CountryCode, city.District, city.Population "
                             + "FROM city, country "
                             + "WHERE city.CountryCode = country.Code "
-                            + "AND country.Name = 'France' "
+                            + "AND country.Name = '"+country+"' "
                             + "ORDER BY city.Population DESC "
-                            + "LIMIT 3 ";
+                            + "LIMIT "+n+" ";
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -445,7 +446,7 @@ public class App {
     }
 
     //Get top N populated cities in a district
-    public ArrayList<City> NPopulatedCitiesInADistrict() {
+    public ArrayList<City> NPopulatedCitiesInADistrict(int n, String district) {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -453,9 +454,9 @@ public class App {
             String strSelect =
                     "SELECT Name, CountryCode, District, Population "
                             + " FROM city "
-                            + " WHERE District='California' "
+                            + " WHERE District='"+district+"' "
                             + " ORDER BY Population DESC"
-                            + " LIMIT 3";
+                            + " LIMIT "+n+"";
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
