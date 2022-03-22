@@ -13,7 +13,7 @@ public class App {
 
         //Connect to database
         if(args.length < 1){
-            Test.connect("localhost:33060", 30000);
+            Test.connect("db:3306", 30000);
         }else{
             Test.connect(args[0], Integer.parseInt(args[1]));
         }
