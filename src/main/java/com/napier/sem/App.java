@@ -30,11 +30,13 @@ public class App {
         //ArrayList<City> cities = Test.getAllCitiesInARegion();
 
         //Display cities in a Country
-        ArrayList<City> cities = Test.getAllCitiesInACountry();
-
+        //ArrayList<City> cities = Test.getAllCitiesInACountry();
 
         //Display top N populated cities
         //ArrayList<City> cities = Test.NPopulatedCities();
+
+        //Display top N populated cities in a continent
+        ArrayList<City> cities = Test.getNCitiesInAContinent();
 
         //Print the cities
         Test.printCities(cities);
@@ -312,5 +314,36 @@ public class App {
         }
     }
 
+    public ArrayList<City> getNCitiesInAContinent() {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT city.Name, city.CountryCode, city.District, city.Population "
+                            + "FROM city, country "
+                            + "WHERE city.CountryCode = country.Code "
+                            + "AND country.continent = 'Europe' "
+                            + "ORDER BY city.Population DESC "
+                            + "LIMIT 3 ";
 
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract employee information
+            ArrayList<City> cities = new ArrayList<City>();
+            while (rset.next()) {
+                City city = new City();
+                city.Name = rset.getString("city.Name");
+                city.CountryCode = rset.getString("city.CountryCode");
+                city.District = rset.getString("city.District");
+                city.Population = rset.getInt("city.Population");
+                cities.add(city);
+            }
+            return cities;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get salary details");
+            return null;
+        }
+    }
 }
