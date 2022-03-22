@@ -13,8 +13,12 @@ public class App {
         //Connect to database
         Test.connect();
 
-        ArrayList<City> cities = Test.getAllCities();
+        //Assign all the records properly
+        //ArrayList<City> cities = Test.getAllCities();
 
+        ArrayList<City> cities = Test.citesByPopulation();
+
+        //Print the cities
         Test.printCities(cities);
 
 
@@ -57,6 +61,7 @@ public class App {
             }
         }
 
+
         //Disconnect from the database
         public void disconnect()
         {
@@ -71,35 +76,42 @@ public class App {
             }
         }
 
+
+
         /**
-     * Prints a list of employees.
+     * Prints a list of cities.
      *
-     * @param cities The list of employees to print.
+     * @param cities The list of cities to print.
      */
     public void printCities(ArrayList<City> cities) {
         // Print header
-        System.out.println(String.format("%-10s %-15s %-20s %-8s", "ID", "Name", "Country Code", "District", "Population"));
+        System.out.println(String.format("%-10s %-15s %-20s %-8s", "Name", "Country Code", "District", "Population"));
         // Loop over all cities in the list
         for (City city : cities) {
             String city_string =
                     String.format("%-10s %-15s %-20s %-8s",
-                            city.ID, city.Name, city.CountryCode, city.District, city.Population);
+                            city.Name, city.CountryCode, city.District, city.Population);
             System.out.println(city_string);
         }
     }
 
-    public ArrayList<City> getAllCities() {
+
+
+
+
+
+    public ArrayList<City> citesByPopulation() {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
                     "SELECT ID, Name, CountryCode, District, Population "
-                            + "FROM city ";
+                            + "FROM city " + "ORDER BY Population ASC";
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
-            // Extract employee information
+            // Extract city information
             ArrayList<City> cities = new ArrayList<City>();
             while (rset.next()) {
                 City city = new City();
@@ -113,10 +125,9 @@ public class App {
             return cities;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get salary details");
+            System.out.println("Failed to get cities");
             return null;
         }
     }
-
 
 }
