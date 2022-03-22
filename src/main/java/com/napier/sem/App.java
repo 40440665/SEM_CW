@@ -12,11 +12,8 @@ public class App {
         App Test = new App();
 
         //Connect to database
-        if(args.length < 1){
-            Test.connect("localhost:33060", 30000);
-        }else{
-            Test.connect(args[0], Integer.parseInt(args[1]));
-        }
+        Test.connect();
+
 
         // CITIES BY POPULATION
         //ArrayList<City> cities = Test.citesByPopulation();
@@ -59,7 +56,7 @@ public class App {
 
 
         //Connect to the database
-        public void connect(String location, int delay)
+        public void connect()
         {
             try {
                 // Load Database driver
@@ -76,11 +73,11 @@ public class App {
                 try {
                     // Wait a bit for db to start
                     //Changing to '0' allows for fast connection with localhost:33060 [Originally 30000]
-                    Thread.sleep(delay);
+                    Thread.sleep(30000);
 
                     // Connect to database
                     // "localhost:33060" Makes a fast connection to the database. [Originally db:3306]
-                    con = DriverManager.getConnection("jdbc:mysql://" + location + "/world?allowPublicKeyRetrieval=true&useSSL=false", "root", "example");
+                    con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false", "root", "example");
                     System.out.println("Successfully connected");
                     // Wait a bit
                     Thread.sleep(10000);
