@@ -12,11 +12,14 @@ public class App {
         App Test = new App();
 
         //Connect to database
-        Test.connect();
-
+        if(args.length < 1){
+            Test.connect("localhost:33060", 30000);
+        }else{
+            Test.connect(args[0], Integer.parseInt(args[1]));
+        }
 
         // CITIES BY POPULATION
-        //ArrayList<City> cities = Test.citesByPopulation();
+        //ArrayList<City> cities = Test.citiesByPopulation();
 
         // CITIES IN A CONTINENT
         //ArrayList<City> cities = Test.getAllCitiesInAContinent();
@@ -56,7 +59,7 @@ public class App {
 
 
         //Connect to the database
-        public void connect()
+        public void connect(String location, int delay)
         {
             try {
                 // Load Database driver
@@ -77,7 +80,7 @@ public class App {
 
                     // Connect to database
                     // "localhost:33060" Makes a fast connection to the database. [Originally db:3306]
-                    con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false", "root", "example");
+                    con = DriverManager.getConnection("jdbc:mysql://" + location + "/world?allowPublicKeyRetrieval=true&useSSL=false", "root", "example");
                     System.out.println("Successfully connected");
                     // Wait a bit
                     Thread.sleep(10000);
@@ -143,13 +146,13 @@ public class App {
 
 
     //Sort cities by population
-    public ArrayList<City> citesByPopulation() {
+    public ArrayList<City> citiesByPopulation() {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT ID, Name, CountryCode, District, Population "
+                    "SELECT Name, CountryCode, District, Population "
                             + " FROM city "
                             + " ORDER BY Population DESC";
 
@@ -159,7 +162,6 @@ public class App {
             ArrayList<City> cities = new ArrayList<City>();
             while (rset.next()) {
                 City city = new City();
-                city.ID = rset.getInt("ID");
                 city.Name = rset.getString("Name");
                 city.CountryCode = rset.getString("CountryCode");
                 city.District = rset.getString("District");
@@ -183,7 +185,7 @@ public class App {
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT ID, Name, CountryCode, District, Population "
+                    "SELECT Name, CountryCode, District, Population "
                             + " FROM city "
                             + " WHERE District='Balkh' "
                             + " ORDER BY Population DESC";
@@ -194,7 +196,6 @@ public class App {
             ArrayList<City> cities = new ArrayList<City>();
             while (rset.next()) {
                 City city = new City();
-                city.ID = rset.getInt("ID");
                 city.Name = rset.getString("Name");
                 city.CountryCode = rset.getString("CountryCode");
                 city.District = rset.getString("District");
@@ -251,7 +252,7 @@ public class App {
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT ID, Name, CountryCode, District, Population "
+                    "SELECT Name, CountryCode, District, Population "
                             + " FROM city "
                             + " ORDER BY Population DESC "
                             + " LIMIT 3";
@@ -262,7 +263,6 @@ public class App {
             ArrayList<City> cities = new ArrayList<City>();
             while (rset.next()) {
                 City city = new City();
-                city.ID = rset.getInt("ID");
                 city.Name = rset.getString("Name");
                 city.CountryCode = rset.getString("CountryCode");
                 city.District = rset.getString("District");
@@ -451,7 +451,7 @@ public class App {
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT ID, Name, CountryCode, District, Population "
+                    "SELECT Name, CountryCode, District, Population "
                             + " FROM city "
                             + " WHERE District='California' "
                             + " ORDER BY Population DESC"
@@ -463,7 +463,6 @@ public class App {
             ArrayList<City> cities = new ArrayList<City>();
             while (rset.next()) {
                 City city = new City();
-                city.ID = rset.getInt("ID");
                 city.Name = rset.getString("Name");
                 city.CountryCode = rset.getString("CountryCode");
                 city.District = rset.getString("District");
