@@ -24,7 +24,10 @@ public class App {
         //ArrayList<City> cities = Test.getAllCitiesInAContinent();
 
         //Display cities by district
-        ArrayList<City> cities = Test.citiesByDistrict();
+        //ArrayList<City> cities = Test.citiesByDistrict();
+
+        //Display top N populated cities
+        ArrayList<City> cities = Test.NPopulatedCities();
 
         //Print the cities
         Test.printCities(cities);
@@ -52,9 +55,9 @@ public class App {
                 System.out.println("Connecting to database...");
                 try {
                     // Wait a bit for db to start
-                    Thread.sleep(30000);
+                    Thread.sleep(0);
                     // Connect to database
-                    con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false", "root", "example");
+                    con = DriverManager.getConnection("jdbc:mysql://localhost:33060/world?useSSL=false", "root", "example");
                     System.out.println("Successfully connected");
                     // Wait a bit
                     Thread.sleep(10000);
@@ -77,7 +80,7 @@ public class App {
                 try {
                     // Close connection
                     con.close();
-                    System.out.println("Dsiconnecting from database");
+                    System.out.println("Disconnecting from database");
                 } catch (Exception e) {
                     System.out.println("Error closing connection to database");
                 }
@@ -93,11 +96,11 @@ public class App {
      */
     public void printCities(ArrayList<City> cities) {
         // Print header
-        System.out.println(String.format("%-10s %-15s %-20s %-8s", "Name", "Country Code", "District", "Population"));
+        System.out.println(String.format("%-40s %-15s %-20s %-8s", "Name", "Country Code", "District", "Population"));
         // Loop over all cities in the list
         for (City city : cities) {
             String city_string =
-                    String.format("%-10s %-15s %-20s %-8s",
+                    String.format("%-40s %-15s %-20s %-8s",
                             city.Name, city.CountryCode, city.District, city.Population);
             System.out.println(city_string);
         }
@@ -199,6 +202,39 @@ public class App {
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get salary details");
+            return null;
+        }
+    }
+
+
+
+    //Get top N populated cities in the world
+    public ArrayList<City> NPopulatedCities() {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT ID, Name, CountryCode, District, Population "
+                            + "FROM city " + "ORDER BY Population DESC " + "LIMIT 3";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract city information
+            ArrayList<City> cities = new ArrayList<City>();
+            while (rset.next()) {
+                City city = new City();
+                city.ID = rset.getInt("ID");
+                city.Name = rset.getString("Name");
+                city.CountryCode = rset.getString("CountryCode");
+                city.District = rset.getString("District");
+                city.Population = rset.getInt("Population");
+                cities.add(city);
+            }
+            return cities;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get cities");
             return null;
         }
     }
