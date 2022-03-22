@@ -1,9 +1,7 @@
 package com.napier.sem;
 
-import java.io.InputStreamReader;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class App {
     Connection con = null;
@@ -130,7 +128,8 @@ public class App {
             // Create string for SQL statement
             String strSelect =
                     "SELECT ID, Name, CountryCode, District, Population "
-                            + "FROM city " + "ORDER BY Population ASC";
+                            + " FROM city "
+                            + " ORDER BY Population DESC";
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -163,7 +162,9 @@ public class App {
             // Create string for SQL statement
             String strSelect =
                     "SELECT ID, Name, CountryCode, District, Population "
-                            + "FROM city " +"WHERE District='Balkh' "  + " " + "ORDER BY Population ASC";
+                            + " FROM city "
+                            + " WHERE District='Balkh' "
+                            + " ORDER BY Population DESC";
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -196,7 +197,8 @@ public class App {
                     "SELECT city.Name, city.CountryCode, city.District, city.Population "
                             + "FROM city, country "
                             + "WHERE city.CountryCode = country.Code "
-                            + "AND country.continent = 'Europe' ";
+                            + "AND country.continent = 'Europe' "
+                            + "ORDER BY city.Population DESC";
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -228,7 +230,9 @@ public class App {
             // Create string for SQL statement
             String strSelect =
                     "SELECT ID, Name, CountryCode, District, Population "
-                            + "FROM city " + "ORDER BY Population DESC " + "LIMIT 3";
+                            + " FROM city "
+                            + " ORDER BY Population DESC "
+                            + " LIMIT 3";
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -260,7 +264,8 @@ public class App {
                     "SELECT city.Name, city.CountryCode, city.District, city.Population "
                             + "FROM city, country "
                             + "WHERE city.CountryCode = country.Code "
-                            + "AND country.Region = 'Caribbean' ";
+                            + "AND country.Region = 'Caribbean' "
+                            + "ORDER BY city.Population DESC";
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -292,7 +297,8 @@ public class App {
                     "SELECT city.Name, city.CountryCode, city.District, city.Population "
                             + "FROM city, country "
                             + "WHERE city.CountryCode = country.Code "
-                            + "AND country.Name = 'France' ";
+                            + "AND country.Name = 'France' "
+                            + "ORDER BY city.Population DESC";
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
