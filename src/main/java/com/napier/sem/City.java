@@ -17,5 +17,5 @@ public class City {
     public String District;
 
     //Population
-    public String Population;
+    public int Population;
 }

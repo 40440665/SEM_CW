@@ -1,6 +1,7 @@
 package com.napier.sem;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class App {
     Connection con = null;
@@ -11,6 +12,11 @@ public class App {
 
         //Connect to database
         Test.connect();
+
+        ArrayList<City> cities = Test.getAllCities();
+
+        Test.printCities(cities);
+
 
         //Disconnect from database
         Test.disconnect();
@@ -65,4 +71,52 @@ public class App {
             }
         }
 
+        /**
+     * Prints a list of employees.
+     *
+     * @param cities The list of employees to print.
+     */
+    public void printCities(ArrayList<City> cities) {
+        // Print header
+        System.out.println(String.format("%-10s %-15s %-20s %-8s", "ID", "Name", "Country Code", "District", "Population"));
+        // Loop over all cities in the list
+        for (City city : cities) {
+            String city_string =
+                    String.format("%-10s %-15s %-20s %-8s",
+                            city.ID, city.Name, city.CountryCode, city.District, city.Population);
+            System.out.println(city_string);
+        }
     }
+
+    public ArrayList<City> getAllCities() {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT ID, Name, CountryCode, District, Population "
+                            + "FROM city ";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract employee information
+            ArrayList<City> cities = new ArrayList<City>();
+            while (rset.next()) {
+                City city = new City();
+                city.ID = rset.getInt("ID");
+                city.Name = rset.getString("Name");
+                city.CountryCode = rset.getString("CountryCode");
+                city.District = rset.getString("District");
+                city.Population = rset.getInt("Population");
+                cities.add(city);
+            }
+            return cities;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get salary details");
+            return null;
+        }
+    }
+
+
+}
