@@ -39,8 +39,12 @@ public class App {
         //Display top N populated cities in a region
         //ArrayList<City> cities = Test.getNCitiesInARegion();
 
+        //Display top N populated cities in a district
+        ArrayList<City> cities = Test.NPopulatedCitiesInADistrict();
+
+
         //Display top N populated cities in a country
-        ArrayList<City> cities = Test.getNCitiesInACountry();
+        //ArrayList<City> cities = Test.getNCitiesInACountry();
 
         //Print the cities
         Test.printCities(cities);
@@ -424,6 +428,40 @@ public class App {
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get city details");
+            return null;
+        }
+    }
+
+    //Get top N populated cities in a district
+    public ArrayList<City> NPopulatedCitiesInADistrict() {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT ID, Name, CountryCode, District, Population "
+                            + " FROM city "
+                            + " WHERE District='California' "
+                            + " ORDER BY Population DESC"
+                            + " LIMIT 3";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract city information
+            ArrayList<City> cities = new ArrayList<City>();
+            while (rset.next()) {
+                City city = new City();
+                city.ID = rset.getInt("ID");
+                city.Name = rset.getString("Name");
+                city.CountryCode = rset.getString("CountryCode");
+                city.District = rset.getString("District");
+                city.Population = rset.getInt("Population");
+                cities.add(city);
+            }
+            return cities;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get cities");
             return null;
         }
     }
