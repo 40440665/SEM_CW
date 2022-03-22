@@ -17,8 +17,11 @@ public class App {
         Test.connect();
 
 
-
+        // CITIES BY POPULATION
         //ArrayList<City> cities = Test.citesByPopulation();
+
+        // CITIES IN A CONTINENT
+        //ArrayList<City> cities = Test.getAllCitiesInAContinent();
 
         //Display cities by district
         ArrayList<City> cities = Test.citiesByDistrict();
@@ -167,4 +170,37 @@ public class App {
             return null;
         }
     }
+
+
+    public ArrayList<City> getAllCitiesInAContinent() {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT city.Name, city.CountryCode, city.District, city.Population "
+                            + "FROM city, country "
+                            + "WHERE city.CountryCode = country.Code "
+                            + "AND country.continent = 'Europe' ";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract employee information
+            ArrayList<City> cities = new ArrayList<City>();
+            while (rset.next()) {
+                City city = new City();
+                city.Name = rset.getString("city.Name");
+                city.CountryCode = rset.getString("city.CountryCode");
+                city.District = rset.getString("city.District");
+                city.Population = rset.getInt("city.Population");
+                cities.add(city);
+            }
+            return cities;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get salary details");
+            return null;
+        }
+    }
+
 }
