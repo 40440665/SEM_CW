@@ -1,22 +1,27 @@
 package com.napier.sem;
 
+import java.io.InputStreamReader;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class App {
     Connection con = null;
 
     public static void main(String[] args) {
+
         //Create new application
         App Test = new App();
 
         //Connect to database
         Test.connect();
 
-        //Assign all the records properly
-        //ArrayList<City> cities = Test.getAllCities();
 
-        ArrayList<City> cities = Test.citesByPopulation();
+
+        //ArrayList<City> cities = Test.citesByPopulation();
+
+        //Display cities by district
+        ArrayList<City> cities = Test.citiesByDistrict();
 
         //Print the cities
         Test.printCities(cities);
@@ -99,7 +104,7 @@ public class App {
 
 
 
-
+    //Sort cities by population
     public ArrayList<City> citesByPopulation() {
         try {
             // Create an SQL statement
@@ -130,4 +135,36 @@ public class App {
         }
     }
 
+
+
+    //Get cities in district and sort by population
+    public ArrayList<City> citiesByDistrict() {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT ID, Name, CountryCode, District, Population "
+                            + "FROM city " +"WHERE District='Balkh' "  + " " + "ORDER BY Population ASC";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract city information
+            ArrayList<City> cities = new ArrayList<City>();
+            while (rset.next()) {
+                City city = new City();
+                city.ID = rset.getInt("ID");
+                city.Name = rset.getString("Name");
+                city.CountryCode = rset.getString("CountryCode");
+                city.District = rset.getString("District");
+                city.Population = rset.getInt("Population");
+                cities.add(city);
+            }
+            return cities;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get cities");
+            return null;
+        }
+    }
 }
