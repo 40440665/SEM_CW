@@ -34,7 +34,13 @@ public class App {
         //ArrayList<City> cities = Test.NPopulatedCities();
 
         //Display top N populated cities in a continent
-        ArrayList<City> cities = Test.getNCitiesInAContinent();
+        //ArrayList<City> cities = Test.getNCitiesInAContinent();
+
+        //Display top N populated cities in a region
+        //ArrayList<City> cities = Test.getNCitiesInARegion();
+
+        //Display top N populated cities in a country
+        ArrayList<City> cities = Test.getNCitiesInACountry();
 
         //Print the cities
         Test.printCities(cities);
@@ -349,6 +355,75 @@ public class App {
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get salary details");
+            return null;
+        }
+    }
+
+
+
+    public ArrayList<City> getNCitiesInARegion() {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT city.Name, city.CountryCode, city.District, city.Population "
+                            + "FROM city, country "
+                            + "WHERE city.CountryCode = country.Code "
+                            + "AND country.Region = 'Caribbean' "
+                            + "ORDER BY city.Population DESC "
+                            + "LIMIT 3 ";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract employee information
+            ArrayList<City> cities = new ArrayList<City>();
+            while (rset.next()) {
+                City city = new City();
+                city.Name = rset.getString("city.Name");
+                city.CountryCode = rset.getString("city.CountryCode");
+                city.District = rset.getString("city.District");
+                city.Population = rset.getInt("city.Population");
+                cities.add(city);
+            }
+            return cities;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city details");
+            return null;
+        }
+    }
+
+
+    public ArrayList<City> getNCitiesInACountry() {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT city.Name, city.CountryCode, city.District, city.Population "
+                            + "FROM city, country "
+                            + "WHERE city.CountryCode = country.Code "
+                            + "AND country.Name = 'France' "
+                            + "ORDER BY city.Population DESC "
+                            + "LIMIT 3 ";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract employee information
+            ArrayList<City> cities = new ArrayList<City>();
+            while (rset.next()) {
+                City city = new City();
+                city.Name = rset.getString("city.Name");
+                city.CountryCode = rset.getString("city.CountryCode");
+                city.District = rset.getString("city.District");
+                city.Population = rset.getInt("city.Population");
+                cities.add(city);
+            }
+            return cities;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city details");
             return null;
         }
     }
