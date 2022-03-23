@@ -17,8 +17,6 @@ public class AppIntegrationTest
 
     }
 
-
-
     @Test
     void testCitiesByPopulation()
     {
@@ -28,8 +26,6 @@ public class AppIntegrationTest
         assertEquals(cities.get(0).District , "Maharashtra");
         assertEquals(cities.get(0).Population , 10500000);
     }
-
-
 
     @Test
     void testGetAllCitiesInAContinent()
@@ -51,10 +47,6 @@ public class AppIntegrationTest
         assertEquals(cities.get(0).Population , 3694820);
     }
 
-
-
-
-
     @Test
     void testCitiesInARegion()
     {
@@ -75,8 +67,6 @@ public class AppIntegrationTest
         assertEquals(cities.get(0).Population , 2125246);
     }
 
-
-
     @Test
     void testNPopulatedCities()
     {
@@ -87,9 +77,6 @@ public class AppIntegrationTest
         assertEquals(cities.get(0).Population , 10500000);
     }
 
-
-
-
     @Test
     void testNPopulatedCitiesInAContinent()
     {
@@ -99,11 +86,6 @@ public class AppIntegrationTest
         assertEquals(cities.get(0).District , "Moscow (City)");
         assertEquals(cities.get(0).Population , 8389200);
     }
-
-
-
-
-
 
     @Test
     void testNPopulatedCitiesInARegion()
@@ -121,12 +103,8 @@ public class AppIntegrationTest
         ArrayList<City> cities = app.NPopulatedCitiesInADistrict(6, "California");
         assertEquals(cities.get(0).Name, "Los Angeles");
         assertEquals(cities.get(0).CountryCode, "USA");
-        //assertEquals(cities.get(0).District , "California");
         assertEquals(cities.get(0).Population , 3694820);
     }
-
-
-
 
     @Test
     void testNPopulatedCitiesInACountry()
