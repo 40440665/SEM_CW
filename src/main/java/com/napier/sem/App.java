@@ -4,6 +4,8 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class App {
+
+    //Set connection variable to null
     Connection con = null;
 
     public static void main(String[] args) {
@@ -18,22 +20,22 @@ public class App {
             Test.connect(args[0], Integer.parseInt(args[1]));
         }
 
-        // CITIES BY POPULATION
+        //Displays cities ordered by population
         //ArrayList<City> cities = Test.citiesByPopulation();
 
-        // CITIES IN A CONTINENT
+        //Displays cities in a continent
         //ArrayList<City> cities = Test.getAllCitiesInAContinent("Europe");
 
         //Display cities by district
         //ArrayList<City> cities = Test.citiesByDistrict("Balkh");
 
-        //Display cities in a Region
+        //Display cities in a region
         //ArrayList<City> cities = Test.getAllCitiesInARegion("Caribbean");
 
-        //Display cities in a Country
+        //Display cities in a country
         //ArrayList<City> cities = Test.getAllCitiesInACountry("France");
 
-        //Display top N populated cities
+        //Display top N populated cities in the world
         //ArrayList<City> cities = Test.NPopulatedCities(4);
 
         //Display top N populated cities in a continent
@@ -45,18 +47,15 @@ public class App {
         //Display top N populated cities in a district
         //ArrayList<City> cities = Test.NPopulatedCitiesInADistrict(6, "California");
 
-
         //Display top N populated cities in a country
         ArrayList<City> cities = Test.getNCitiesInACountry(3, "France");
 
         //Print the cities
         Test.printCities(cities);
 
-
         //Disconnect from database
         Test.disconnect();
         }
-
 
         //Connect to the database
         public void connect(String location, int delay)
@@ -113,9 +112,9 @@ public class App {
 
 
         /**
-     * Prints a list of cities.
+     * Prints a list of cities
      *
-     * @param cities The list of cities to print.
+     * @param cities The list of cities to print
      */
     public void printCities(ArrayList<City> cities) {
 
@@ -128,12 +127,15 @@ public class App {
 
         // Print header
         System.out.println(String.format("%-40s %-15s %-20s %-8s", "Name", "Country Code", "District", "Population"));
+
         // Loop over all cities in the list
         for (City city : cities) {
             if (city == null)
             {
                 continue;
             }
+
+            //Formatting the rows that will come under the header
             String city_string =
                     String.format("%-40s %-15s %-20s %-8s",
                             city.Name, city.CountryCode, city.District, city.Population);
@@ -142,10 +144,9 @@ public class App {
     }
 
 
-
-
-
-    //Sort cities by population
+    /**
+     * Sorts all cities in the world by population
+     */
     public ArrayList<City> citiesByPopulation() {
         try {
             // Create an SQL statement
@@ -177,8 +178,11 @@ public class App {
     }
 
 
-
-    //Get cities in district and sort by population
+    /**
+     * Prints a list of cities in a district sorted by population
+     * taking in
+     * @param district which is the name of the desired district
+     */
     public ArrayList<City> citiesByDistrict(String district) {
         try {
 
@@ -218,7 +222,11 @@ public class App {
         }
     }
 
-
+    /**
+     * Prints a list of cities in a continent sorted by population
+     * taking in
+     * @param continent which is the name of the desired continent
+     */
     public ArrayList<City> getAllCitiesInAContinent(String continent) {
         try {
             //Check if continent is null
@@ -257,9 +265,11 @@ public class App {
         }
     }
 
-
-
-    //Get top N populated cities in the world
+    /**
+     * Prints a top list of N cities in the world based on the input from the user.
+     * taking in
+     * @param n number of cities that we want to display
+     */
     public ArrayList<City> NPopulatedCities(int n) {
         try {
             //Check if n is 0
@@ -297,6 +307,11 @@ public class App {
         }
     }
 
+    /**
+     * Prints a list of cities in a region sorted by order
+     * taking in
+     * @param region which is the name of the desired region
+     */
     public ArrayList<City> getAllCitiesInARegion(String region) {
         try {
             //Check if region is null
@@ -335,7 +350,11 @@ public class App {
         }
     }
 
-
+    /**
+     * Prints a list of cities in a country sorted by population
+     * taking in
+     * @param country which is the name of the desired country
+     */
     public ArrayList<City> getAllCitiesInACountry(String country) {
         try {
             //Check if country is null
@@ -374,6 +393,12 @@ public class App {
         }
     }
 
+    /**
+     * Prints a top list of N cities in a continent sorted by population
+     * taking in
+     * @param n number of cities
+     * @param continent the name of the desired continent
+     */
     public ArrayList<City> getNCitiesInAContinent(int n, String continent) {
         try {
             //Check if n is 0
@@ -421,7 +446,12 @@ public class App {
     }
 
 
-
+    /**
+     * Prints a top list of N cities in a region sorted by population
+     * taking in
+     * @param n number of cities
+     * @param region the name of the desired region
+     */
     public ArrayList<City> getNCitiesInARegion(int n, String region) {
         try {
             //Check if n is 0
@@ -468,7 +498,12 @@ public class App {
         }
     }
 
-
+    /**
+     * Prints a top list of N cities in a country sorted by population
+     * taking in
+     * @param n number of cities
+     * @param country the name of the desired country
+     */
     public ArrayList<City> getNCitiesInACountry(int n, String country) {
         try {
             //Check if n is 0
@@ -515,6 +550,12 @@ public class App {
         }
     }
 
+    /**
+     * Prints a top list of N cities in a district sorted by population
+     * taking in
+     * @param n number of cities
+     * @param district the name of the desired district
+     */
     //Get top N populated cities in a district
     public ArrayList<City> NPopulatedCitiesInADistrict(int n, String district) {
         try {

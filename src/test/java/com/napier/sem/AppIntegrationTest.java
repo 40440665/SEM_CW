@@ -2,9 +2,7 @@ package com.napier.sem;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AppIntegrationTest
@@ -14,7 +12,10 @@ public class AppIntegrationTest
     @BeforeAll
     static void init()
     {
+        //Create new application
         app = new App();
+
+        //Connect to database
         app.connect("localhost:33060", 30000);
 
     }
