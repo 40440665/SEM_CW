@@ -181,6 +181,13 @@ public class App {
     //Get cities in district and sort by population
     public ArrayList<City> citiesByDistrict(String district) {
         try {
+
+            //Check if district is null
+            if (district == null)
+            {
+                System.out.println("district is null");
+                return null;
+            }
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
@@ -214,6 +221,12 @@ public class App {
 
     public ArrayList<City> getAllCitiesInAContinent(String continent) {
         try {
+            //Check if continent is null
+            if (continent == null)
+            {
+                System.out.println("continent is null");
+                return null;
+            }
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
@@ -249,6 +262,12 @@ public class App {
     //Get top N populated cities in the world
     public ArrayList<City> NPopulatedCities(int n) {
         try {
+            //Check if n is 0
+            if (n == 0)
+            {
+                System.out.println("n is 0");
+                return null;
+            }
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
@@ -280,6 +299,12 @@ public class App {
 
     public ArrayList<City> getAllCitiesInARegion(String region) {
         try {
+            //Check if region is null
+            if (region == null)
+            {
+                System.out.println("region is null");
+                return null;
+            }
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
@@ -313,6 +338,12 @@ public class App {
 
     public ArrayList<City> getAllCitiesInACountry(String country) {
         try {
+            //Check if country is null
+            if (country == null)
+            {
+                System.out.println("country is null");
+                return null;
+            }
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
@@ -345,6 +376,19 @@ public class App {
 
     public ArrayList<City> getNCitiesInAContinent(int n, String continent) {
         try {
+            //Check if n is 0
+            if (n == 0)
+            {
+                System.out.println("n is empty");
+                return null;
+            }
+
+            //Check if continent is null
+            if (continent == null)
+            {
+                System.out.println("Country is null");
+                return null;
+            }
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
@@ -380,6 +424,19 @@ public class App {
 
     public ArrayList<City> getNCitiesInARegion(int n, String region) {
         try {
+            //Check if n is 0
+            if (n == 0)
+            {
+                System.out.println("n is empty");
+                return null;
+            }
+
+            //Check if region is null
+            if (region == null)
+            {
+                System.out.println("Region is null");
+                return null;
+            }
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
@@ -461,6 +518,19 @@ public class App {
     //Get top N populated cities in a district
     public ArrayList<City> NPopulatedCitiesInADistrict(int n, String district) {
         try {
+            //Check if n is 0
+            if (n == 0)
+            {
+                System.out.println("n is empty");
+                return null;
+            }
+
+            //Check if district is null
+            if (district == null)
+            {
+                System.out.println("district is null");
+                return null;
+            }
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
