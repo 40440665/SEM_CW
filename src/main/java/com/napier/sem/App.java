@@ -207,7 +207,6 @@ public class App {
             ArrayList<City> cities = new ArrayList<City>();
             while (rset.next()) {
                 City city = new City();
-                city.ID = rset.getInt("ID");
                 city.Name = rset.getString("Name");
                 city.CountryCode = rset.getString("CountryCode");
                 city.District = rset.getString("District");
