@@ -51,12 +51,12 @@ public class AppTest
     @Test
     void nPopulatedCitiesInCountryNis0()
     {
-        app.getNCitiesInACountry(0, "France");
+        app.nPopulatedCitiesInACountry(0, "France");
     }
     @Test
     void nPopulatedCitiesInCountryNull()
     {
-        app.getNCitiesInACountry(1,null);
+        app.nPopulatedCitiesInACountry(1,null);
     }
 
 
@@ -67,63 +67,63 @@ public class AppTest
     }
 
     @Test
-    void getAllCitiesInAContinentNull()
+    void citiesByContinentNull()
     {
-        app.getAllCitiesInAContinent(null);
+        app.citiesByContinent(null);
     }
 
     @Test
-    void NPopulatedCitiesIs0()
+    void nPopulatedCitiesIs0()
     {
-        app.NPopulatedCities(0);
+        app.nPopulatedCities(0);
     }
 
     @Test
-    void getAllCitiesInARegionNull()
+    void citiesByRegionNull()
     {
-        app.getAllCitiesInARegion(null);
+        app.citiesByRegion(null);
     }
 
     @Test
-    void getAllCitiesInACountryNull()
+    void citiesByCountryNull()
     {
-        app.getAllCitiesInACountry(null);
+        app.citiesByCountry(null);
     }
 
     @Test
-    void getNCitiesInAContinentNIs0()
+    void nPopulatedCitiesInAContinentNIs0()
     {
-        app.getNCitiesInAContinent(0, "Europe");
+        app.nPopulatedCitiesInAContinent(0, "Europe");
     }
 
     @Test
-    void getNCitiesInAContinentNull()
+    void nPopulatedCitiesInAContinentNull()
     {
-        app.getNCitiesInAContinent(1, null);
+        app.nPopulatedCitiesInAContinent(1, null);
     }
 
     @Test
-    void getNCitiesInARegionNIs0()
+    void nPopulatedCitiesInARegionNIs0()
     {
-        app.getNCitiesInARegion(0, "Caribbean");
+        app.nPopulatedCitiesInARegion(0, "Caribbean");
     }
 
     @Test
-    void getNCitiesInARegionNull()
+    void nPopulatedCitiesInARegionNull()
     {
-        app.getNCitiesInARegion(1, null);
+        app.nPopulatedCitiesInARegion(1, null);
     }
 
     @Test
-    void NPopulatedCitiesInADistrictNIs0()
+    void nPopulatedCitiesInADistrictNIs0()
     {
-        app.NPopulatedCitiesInADistrict(0, "Balkh");
+        app.nPopulatedCitiesInADistrict(0, "Balkh");
     }
 
     @Test
-    void NPopulatedCitiesInADistrictNull()
+    void nPopulatedCitiesInADistrictNull()
     {
-        app.NPopulatedCitiesInADistrict(1, null);
+        app.nPopulatedCitiesInADistrict(1, null);
     }
 
 }

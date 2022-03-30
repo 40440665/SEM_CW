@@ -24,94 +24,94 @@ public class App {
         //ArrayList<City> cities = Test.citiesByPopulation();
 
         //Displays cities in a continent
-        //ArrayList<City> cities = Test.getAllCitiesInAContinent("Europe");
+        //ArrayList<City> cities = Test.citiesByContinent("Europe");
 
         //Display cities by district
         //ArrayList<City> cities = Test.citiesByDistrict("Balkh");
 
         //Display cities in a region
-        //ArrayList<City> cities = Test.getAllCitiesInARegion("Caribbean");
+        //ArrayList<City> cities = Test.citiesByRegion("Caribbean");
 
         //Display cities in a country
-        //ArrayList<City> cities = Test.getAllCitiesInACountry("France");
+        //ArrayList<City> cities = Test.citiesByCountry("France");
 
         //Display top N populated cities in the world
-        //ArrayList<City> cities = Test.NPopulatedCities(4);
+        //ArrayList<City> cities = Test.nPopulatedCities(4);
 
         //Display top N populated cities in a continent
-        //ArrayList<City> cities = Test.getNCitiesInAContinent(3,"Europe");
+        //ArrayList<City> cities = Test.nPopulatedCitiesInAContinent(3,"Europe");
 
         //Display top N populated cities in a region
-        //ArrayList<City> cities = Test.getNCitiesInARegion(4, "Caribbean");
+        //ArrayList<City> cities = Test.nPopulatedCitiesInARegion(4, "Caribbean");
 
         //Display top N populated cities in a district
-        //ArrayList<City> cities = Test.NPopulatedCitiesInADistrict(6, "California");
+        //ArrayList<City> cities = Test.nPopulatedCitiesInADistrict(6, "California");
 
         //Display top N populated cities in a country
-        ArrayList<City> cities = Test.getNCitiesInACountry(3, "France");
+        ArrayList<City> cities = Test.nPopulatedCitiesInACountry(3, "France");
 
         //Print the cities
         Test.printCities(cities);
 
         //Disconnect from database
         Test.disconnect();
-        }
+    }
 
         //Connect to the database
-        public void connect(String location, int delay)
-        {
+    public void connect(String location, int delay)
+    {
+        try {
+            // Load Database driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            System.out.println("Could not load SQL driver");
+            System.exit(-1);
+        }
+
+        // Connection to the database
+        int retries = 100;
+        for (int i = 0; i < retries; ++i) {
+            System.out.println("Connecting to database...");
             try {
-                // Load Database driver
-                Class.forName("com.mysql.cj.jdbc.Driver");
-            } catch (ClassNotFoundException e) {
-                System.out.println("Could not load SQL driver");
-                System.exit(-1);
-            }
+                // Wait a bit for db to start
+                //Changing to '0' allows for fast connection with localhost:33060 [Originally 30000]
+                Thread.sleep(30000);
 
-            // Connection to the database
-            int retries = 100;
-            for (int i = 0; i < retries; ++i) {
-                System.out.println("Connecting to database...");
-                try {
-                    // Wait a bit for db to start
-                    //Changing to '0' allows for fast connection with localhost:33060 [Originally 30000]
-                    Thread.sleep(30000);
-
-                    // Connect to database
-                    // "localhost:33060" Makes a fast connection to the database. [Originally db:3306]
-                    con = DriverManager.getConnection("jdbc:mysql://" + location + "/world?allowPublicKeyRetrieval=true&useSSL=false", "root", "example");
-                    System.out.println("Successfully connected");
-                    // Wait a bit
-                    Thread.sleep(10000);
-                    // Exit for loop
-                    break;
-                } catch (SQLException sqle) {
-                    System.out.println("Failed to connect to database attempt " + Integer.toString(i));
-                    System.out.println(sqle.getMessage());
-                } catch (InterruptedException ie) {
-                    System.out.println("Thread interrupted? Should not happen.");
-                }
+                // Connect to database
+                // "localhost:33060" Makes a fast connection to the database. [Originally db:3306]
+                con = DriverManager.getConnection("jdbc:mysql://" + location + "/world?allowPublicKeyRetrieval=true&useSSL=false", "root", "example");
+                System.out.println("Successfully connected");
+                // Wait a bit
+                Thread.sleep(10000);
+                // Exit for loop
+                break;
+            } catch (SQLException sqle) {
+                System.out.println("Failed to connect to database attempt " + Integer.toString(i));
+                System.out.println(sqle.getMessage());
+            } catch (InterruptedException ie) {
+                System.out.println("Thread interrupted? Should not happen.");
             }
         }
+    }
 
 
-        //Disconnect from the database
-        public void disconnect()
-        {
-            if (con != null) {
-                try {
-                    // Close connection
-                    con.close();
-                    System.out.println("Disconnecting from database");
-                } catch (Exception e) {
-                    System.out.println("Error closing connection to database");
-                }
+    //Disconnect from the database
+    public void disconnect()
+    {
+        if (con != null) {
+            try {
+                // Close connection
+                con.close();
+                System.out.println("Disconnecting from database");
+            } catch (Exception e) {
+                System.out.println("Error closing connection to database");
             }
         }
+    }
 
 
 
-        /**
+    /**
      * Prints a list of cities
      *
      * @param cities The list of cities to print
@@ -226,7 +226,7 @@ public class App {
      * taking in
      * @param continent which is the name of the desired continent
      */
-    public ArrayList<City> getAllCitiesInAContinent(String continent) {
+    public ArrayList<City> citiesByContinent(String continent) {
         try {
             //Check if continent is null
             if (continent == null)
@@ -269,7 +269,7 @@ public class App {
      * taking in
      * @param n number of cities that we want to display
      */
-    public ArrayList<City> NPopulatedCities(int n) {
+    public ArrayList<City> nPopulatedCities(int n) {
         try {
             //Check if n is 0
             if (n == 0)
@@ -311,7 +311,7 @@ public class App {
      * taking in
      * @param region which is the name of the desired region
      */
-    public ArrayList<City> getAllCitiesInARegion(String region) {
+    public ArrayList<City> citiesByRegion(String region) {
         try {
             //Check if region is null
             if (region == null)
@@ -354,7 +354,7 @@ public class App {
      * taking in
      * @param country which is the name of the desired country
      */
-    public ArrayList<City> getAllCitiesInACountry(String country) {
+    public ArrayList<City> citiesByCountry(String country) {
         try {
             //Check if country is null
             if (country == null)
@@ -398,7 +398,7 @@ public class App {
      * @param n number of cities
      * @param continent the name of the desired continent
      */
-    public ArrayList<City> getNCitiesInAContinent(int n, String continent) {
+    public ArrayList<City> nPopulatedCitiesInAContinent(int n, String continent) {
         try {
             //Check if n is 0
             if (n == 0)
@@ -451,7 +451,7 @@ public class App {
      * @param n number of cities
      * @param region the name of the desired region
      */
-    public ArrayList<City> getNCitiesInARegion(int n, String region) {
+    public ArrayList<City> nPopulatedCitiesInARegion(int n, String region) {
         try {
             //Check if n is 0
             if (n == 0)
@@ -503,7 +503,7 @@ public class App {
      * @param n number of cities
      * @param country the name of the desired country
      */
-    public ArrayList<City> getNCitiesInACountry(int n, String country) {
+    public ArrayList<City> nPopulatedCitiesInACountry(int n, String country) {
         try {
             //Check if n is 0
             if (n == 0)
@@ -556,7 +556,7 @@ public class App {
      * @param district the name of the desired district
      */
     //Get top N populated cities in a district
-    public ArrayList<City> NPopulatedCitiesInADistrict(int n, String district) {
+    public ArrayList<City> nPopulatedCitiesInADistrict(int n, String district) {
         try {
             //Check if n is 0
             if (n == 0)
