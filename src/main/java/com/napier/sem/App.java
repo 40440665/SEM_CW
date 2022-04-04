@@ -20,6 +20,8 @@ public class App {
             Test.connect(args[0], Integer.parseInt(args[1]));
         }
 
+        /// CITY METHODS
+
         //Displays cities ordered by population
         //ArrayList<City> cities = Test.citiesByPopulation();
 
@@ -48,10 +50,51 @@ public class App {
         //ArrayList<City> cities = Test.nPopulatedCitiesInADistrict(6, "California");
 
         //Display top N populated cities in a country
-        ArrayList<City> cities = Test.nPopulatedCitiesInACountry(3, "France");
+        //ArrayList<City> cities = Test.nPopulatedCitiesInACountry(3, "France");
+
+
+        // COUNTRY METHODS
+
+        //Displays cities ordered by population
+        //ArrayList<Country> cities = Test.citiesByPopulation();
+
+        //Displays cities in a continent
+        //ArrayList<Country> cities = Test.citiesByContinent("Europe");
+
+        //Display cities by district
+        //ArrayList<Country> cities = Test.citiesByDistrict("Balkh");
+
+        //Display cities in a region
+        //ArrayList<Country> cities = Test.citiesByRegion("Caribbean");
+
+        //Display cities in a country
+        //ArrayList<Country> cities = Test.citiesByCountry("France");
+
+        //Display top N populated cities in the world
+        //ArrayList<Country> cities = Test.nPopulatedCities(4);
+
+        //Display top N populated cities in a continent
+        //ArrayList<Country> cities = Test.nPopulatedCitiesInAContinent(3,"Europe");
+
+        //Display top N populated cities in a region
+        //ArrayList<Country> cities = Test.nPopulatedCitiesInARegion(4, "Caribbean");
+
+        //Display top N populated cities in a district
+        //ArrayList<Country> cities = Test.nPopulatedCitiesInADistrict(6, "California");
+
+        //Display top N populated cities in a country
+        //ArrayList<Country> countries = Test.nPopulatedCitiesInACountry(3, "France");
+
+
+
+
+        // INVOKE PRINT METHODS
 
         //Print the cities
-        Test.printCities(cities);
+        //Test.printCities(cities);
+
+        //Print the countries
+        Test.printCountries(countries);
 
         //Disconnect from database
         Test.disconnect();
@@ -140,6 +183,38 @@ public class App {
                     String.format("%-40s %-15s %-20s %-8s",
                             city.Name, city.CountryCode, city.District, city.Population);
             System.out.println(city_string);
+        }
+    }
+
+    /**
+     * Prints a list of cities
+     *
+     * @param countries The list of cities to print
+     */
+    public void printCountries(ArrayList<Country> countries) {
+
+        // Check countries is not null
+        if (countries == null)
+        {
+            System.out.println("No countries");
+            return;
+        }
+
+        // Print header
+        System.out.println(String.format("%-40s %-15s %-20s %-8s", "Name", "Country Code", "District", "Population"));
+
+        // Loop over all countries in the list
+        for (Country country : countries) {
+            if (country == null)
+            {
+                continue;
+            }
+
+            //Formatting the rows that will come under the header
+            String country_string =
+                    String.format("%-40s %-15s %-20s %-8s",
+                            country.CountryCode, country.Name, country.Continent, country.Region, country.Population, country.Capital);
+            System.out.println(country_string);
         }
     }
 
