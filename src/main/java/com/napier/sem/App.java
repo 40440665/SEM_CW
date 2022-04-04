@@ -79,7 +79,7 @@ public class App {
         //Test.printCities(cities);
 
         //Print the countries
-        Test.printCountries(countries);
+        //Test.printCountries(countries);
 
         //Disconnect from database
         Test.disconnect();
@@ -186,7 +186,7 @@ public class App {
         }
 
         // Print header
-        System.out.println(String.format("%-40s %-15s %-20s %-8s", "Name", "Country Code", "District", "Population"));
+        System.out.println(String.format("%-40s %-15s %-20s %-8s %-8s %-8s", "Country Code", "Name", "Continent", "Region", "Population", "Capital"));
 
         // Loop over all countries in the list
         for (Country country : countries) {
