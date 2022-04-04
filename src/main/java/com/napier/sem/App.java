@@ -56,7 +56,7 @@ public class App {
         // COUNTRY METHODS
 
         //Displays countries ordered by population
-        ArrayList<Country> countries = Test.countriesByPopulation();
+        //ArrayList<Country> countries = Test.countriesByPopulation();
 
         //Displays countries in a continent
         //ArrayList<Country> countries = Test.countriesByContinent("Europe");
