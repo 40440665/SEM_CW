@@ -175,7 +175,7 @@ public class AppIntegrationTest
     @Test
     void testCountriesByPopulation()
     {
-        ArrayList<Country> countries = app.citiesByPopulation();
+        ArrayList<Country> countries = app.countriesByPopulation();
         assertEquals(countries.get(0).CountryCode, "CHN");
         assertEquals(countries.get(0).Name, "China");
         assertEquals(countries.get(0).Continent, "Asia");
