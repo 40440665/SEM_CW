@@ -38,7 +38,7 @@ public class App {
         //ArrayList<City> cities = Test.citiesByCountry("France");
 
         //Display top N populated cities in the world
-        //ArrayList<City> cities = Test.nPopulatedCities(4);
+        ArrayList<City> cities = Test.nPopulatedCities(4);
 
         //Display top N populated cities in a continent
         //ArrayList<City> cities = Test.nPopulatedCitiesInAContinent(3,"Europe");
@@ -50,7 +50,7 @@ public class App {
         //ArrayList<City> cities = Test.nPopulatedCitiesInADistrict(6, "California");
 
         //Display top N populated cities in a country
-        ArrayList<City> cities = Test.nPopulatedCitiesInACountry(3, "France");
+        //ArrayList<City> cities = Test.nPopulatedCitiesInACountry(3, "France");
 
 
         // COUNTRY METHODS
@@ -406,6 +406,48 @@ public class App {
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get city details");
+            return null;
+        }
+    }
+
+   /**
+     * Prints a top list of N cities in the world based on the input from the user.
+     * taking in
+     * @param n number of cities that we want to display
+     */
+    public ArrayList<City> nPopulatedCities(int n) {
+        try {
+            //Check if n is 0
+            if (n == 0)
+            {
+                System.out.println("n is 0");
+                return null;
+            }
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT Name, CountryCode, District, Population "
+                            + " FROM city "
+                            + " ORDER BY Population DESC "
+                            + " LIMIT "+n+"";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract city information
+            ArrayList<City> cities = new ArrayList<City>();
+            while (rset.next()) {
+                City city = new City();
+                city.Name = rset.getString("Name");
+                city.CountryCode = rset.getString("CountryCode");
+                city.District = rset.getString("District");
+                city.Population = rset.getInt("Population");
+                cities.add(city);
+            }
+            return cities;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get cities");
             return null;
         }
     }
