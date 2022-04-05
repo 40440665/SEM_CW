@@ -742,50 +742,7 @@ public class App {
         }
     }
 
-        /**
-     * Prints a list of countries in a region sorted by population
-     * taking in
-     * @param region which is the name of the desired region
-     */
-    public ArrayList<Country> countriesByRegion(String region) {
-        try {
-            //Check if region is null
-            if (region == null)
-            {
-                System.out.println("region is null");
-                return null;
-            }
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement
-            String strSelect =
-                    "SELECT CountryCode, Name, Continent, Region, Population, Capital "
-                            + " FROM country "
-                            + " WHERE Region = '" + region + "' "
-                            + " ORDER BY Population DESC";
-
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-            // Extract country information
-            ArrayList<Country> countries = new ArrayList<Country>();
-            while (rset.next()) {
-                Country country = new Country();
-                country.CountryCode = rset.getString("CountryCode");
-                country.Name = rset.getString("Name");
-                country.Continent = rset.getString("Continent");
-                country.Region = rset.getString("Region");
-                country.Population = rset.getInt("Population");
-                country.Capital = rset.getInt("Capital");
-                countries.add(country);
-            }
-            return countries;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get countries");
-            return null;
-        }
-    }
-
+ 
        /**
      * Prints a top list of N countries in the world based on the input from the user.
      * taking in
