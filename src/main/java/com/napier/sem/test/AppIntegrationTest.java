@@ -176,11 +176,11 @@ public class AppIntegrationTest
     void testCountriesByPopulation()
     {
         ArrayList<Country> countries = app.citiesByPopulation();
-        assertEquals(countries.get(0).CountryCode, "CHN")
+        assertEquals(countries.get(0).CountryCode, "CHN");
         assertEquals(countries.get(0).Name, "China");
         assertEquals(countries.get(0).Continent, "Asia");
         assertEquals(countries.get(0).Region , "Eastern Asia");
-        assertEquals(countries.get(0).Capital, "1891")
+        assertEquals(countries.get(0).Capital, "1891");
         assertEquals(countries.get(0).Population , 2125246);
     }
 }

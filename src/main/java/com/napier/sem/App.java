@@ -324,8 +324,6 @@ public class App {
         }
     }
 
- v
-
     /**
      * Prints a list of cities in a region sorted by order
      * taking in
