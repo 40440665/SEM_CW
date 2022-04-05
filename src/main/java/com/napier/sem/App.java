@@ -197,7 +197,7 @@ public class App {
 
             //Formatting the rows that will come under the header
             String country_string =
-                    String.format("%-40s %-15s %-20s %-8s",
+                    String.format("%-40s %-15s %-20s %-8s %-8s %-8s",
                             country.CountryCode, country.Name, country.Continent, country.Region, country.Population, country.Capital);
             System.out.println(country_string);
         }
@@ -645,7 +645,7 @@ public class App {
                 country.Continent = rset.getString("Continent");
                 country.Region = rset.getString("Region");
                 country.Population = rset.getInt("Population");
-                country.Capital = rset.getString("Capital");
+                country.Capital = rset.getInt("Capital");
                 countries.add(country);
             }
             return countries;
@@ -689,7 +689,7 @@ public class App {
                 country.Continent = rset.getString("Continent");
                 country.Region = rset.getString("Region");
                 country.Population = rset.getInt("Population");
-                country.Capital = rset.getString("Capital");
+                country.Capital = rset.getInt("Capital");
                 countries.add(country);
             }
             return countries;
@@ -733,7 +733,7 @@ public class App {
                 country.Continent = rset.getString("Continent");
                 country.Region = rset.getString("Region");
                 country.Population = rset.getInt("Population");
-                country.Capital = rset.getString("Capital");
+                country.Capital = rset.getInt("Capital");
                 countries.add(country);
             }
             return countries;
@@ -777,7 +777,7 @@ public class App {
                 country.Continent = rset.getString("Continent");
                 country.Region = rset.getString("Region");
                 country.Population = rset.getInt("Population");
-                country.Capital = rset.getString("Capital");
+                country.Capital = rset.getInt("Capital");
                 countries.add(country);
             }
             return countries;
@@ -820,7 +820,7 @@ public class App {
                 country.Continent = rset.getString("Continent");
                 country.Region = rset.getString("Region");
                 country.Population = rset.getInt("Population");
-                country.Capital = rset.getString("Capital");
+                country.Capital = rset.getInt("Capital");
                 countries.add(country);
             }
             return countries;
@@ -874,7 +874,7 @@ public class App {
                 country.Continent = rset.getString("Continent");
                 country.Region = rset.getString("Region");
                 country.Population = rset.getInt("Population");
-                country.Capital = rset.getString("Capital");
+                country.Capital = rset.getInt("Capital");
                 countries.add(country);
             }
             return countries;
@@ -928,7 +928,7 @@ public class App {
                 country.Continent = rset.getString("Continent");
                 country.Region = rset.getString("Region");
                 country.Population = rset.getInt("Population");
-                country.Capital = rset.getString("Capital");
+                country.Capital = rset.getInt("Capital");
                 countries.add(country);
             }
             return countries;
