@@ -15,7 +15,10 @@ public class App {
 
         //Connect to database
         if(args.length < 1){
+            //Slow Connection
             Test.connect("db:3306", 30000);
+            //Fast Connection
+            //Test.connect("localhost:33060", 0);
         }else{
             Test.connect(args[0], Integer.parseInt(args[1]));
         }
@@ -38,7 +41,7 @@ public class App {
         //ArrayList<City> cities = Test.citiesByCountry("France");
 
         //Display top N populated cities in the world
-        ArrayList<City> cities = Test.nPopulatedCities(4);
+        //ArrayList<City> cities = Test.nPopulatedCities(4);
 
         //Display top N populated cities in a continent
         //ArrayList<City> cities = Test.nPopulatedCitiesInAContinent(3,"Europe");
@@ -71,7 +74,7 @@ public class App {
         //ArrayList<Country> countries = Test.nPopulatedCountriesInAContinent(3,"Europe");
 
         //Display top N populated countries in a region
-        //ArrayList<Country> countries = Test.nPopulatedCountriesInARegion(4, "Caribbean");
+        ArrayList<Country> countries = Test.nPopulatedCountriesInARegion(4, "Caribbean");
 
         // INVOKE PRINT METHODS
 
@@ -79,7 +82,7 @@ public class App {
         //Test.printCities(cities);
 
         //Print the countries
-        //Test.printCountries(countries);
+        Test.printCountries(countries);
 
         //Disconnect from database
         Test.disconnect();
@@ -103,14 +106,14 @@ public class App {
             try {
                 // Wait a bit for db to start
                 //Changing to '0' allows for fast connection with localhost:33060 [Originally 30000]
-                Thread.sleep(30000);
+                Thread.sleep(delay);
 
                 // Connect to database
                 // "localhost:33060" Makes a fast connection to the database. [Originally db:3306]
                 con = DriverManager.getConnection("jdbc:mysql://" + location + "/world?allowPublicKeyRetrieval=true&useSSL=false", "root", "example");
                 System.out.println("Successfully connected");
                 // Wait a bit
-                Thread.sleep(10000);
+                Thread.sleep(delay);
                 // Exit for loop
                 break;
             } catch (SQLException sqle) {
@@ -154,7 +157,7 @@ public class App {
         }
 
         // Print header
-        System.out.println(String.format("%-40s %-15s %-20s %-8s", "Name", "Country Code", "District", "Population"));
+        System.out.println(String.format("%-40s %-15s %-20s %-8s", "Name", "CountryCode", "District", "Population"));
 
         // Loop over all cities in the list
         for (City city : cities) {
@@ -186,7 +189,7 @@ public class App {
         }
 
         // Print header
-        System.out.println(String.format("%-40s %-15s %-20s %-8s %-8s %-8s", "Country Code", "Name", "Continent", "Region", "Population", "Capital"));
+        System.out.println(String.format("%-5s %-45s %-15s %-30s %-15s %-8s", "Code", "Name", "Continent", "Region", "Population", "Capital"));
 
         // Loop over all countries in the list
         for (Country country : countries) {
@@ -197,8 +200,8 @@ public class App {
 
             //Formatting the rows that will come under the header
             String country_string =
-                    String.format("%-40s %-15s %-20s %-8s %-8s %-8s",
-                            country.CountryCode, country.Name, country.Continent, country.Region, country.Population, country.Capital);
+                    String.format("%-5s %-45s %-15s %-30s %-15s %-8s",
+                            country.Code, country.Name, country.Continent, country.Region, country.Population, country.Capital);
             System.out.println(country_string);
         }
     }
@@ -670,7 +673,7 @@ public class App {
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT CountryCode, Name, Continent, Region, Population, Capital "
+                    "SELECT Code, Name, Continent, Region, Population, Capital "
                             + " FROM country "
                             + " ORDER BY Population DESC";
 
@@ -680,7 +683,7 @@ public class App {
             ArrayList<Country> countries = new ArrayList<Country>();
             while (rset.next()) {
                 Country country = new Country();
-                country.CountryCode = rset.getString("CountryCode");
+                country.Code = rset.getString("Code");
                 country.Name = rset.getString("Name");
                 country.Continent = rset.getString("Continent");
                 country.Region = rset.getString("Region");
@@ -713,7 +716,7 @@ public class App {
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT CountryCode, Name, Continent, Region, Population, Capital "
+                    "SELECT Code, Name, Continent, Region, Population, Capital "
                             + " FROM country "
                             + " WHERE Continent = '" + continent + "' "
                             + " ORDER BY Population DESC";
@@ -724,7 +727,7 @@ public class App {
             ArrayList<Country> countries = new ArrayList<Country>();
             while (rset.next()) {
                 Country country = new Country();
-                country.CountryCode = rset.getString("CountryCode");
+                country.Code = rset.getString("Code");
                 country.Name = rset.getString("Name");
                 country.Continent = rset.getString("Continent");
                 country.Region = rset.getString("Region");
@@ -757,7 +760,7 @@ public class App {
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT CountryCode, Name, Continent, Region, Population, Capital "
+                    "SELECT Code, Name, Continent, Region, Population, Capital "
                             + " FROM country "
                             + " WHERE Region = '" + region + "' "
                             + " ORDER BY Population DESC";
@@ -768,7 +771,7 @@ public class App {
             ArrayList<Country> countries = new ArrayList<Country>();
             while (rset.next()) {
                 Country country = new Country();
-                country.CountryCode = rset.getString("CountryCode");
+                country.Code = rset.getString("Code");
                 country.Name = rset.getString("Name");
                 country.Continent = rset.getString("Continent");
                 country.Region = rset.getString("Region");
@@ -802,8 +805,9 @@ public class App {
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect = 
-                    "SELECT CountryCode, Name, Continent, Region, Population, Capital "
+                    "SELECT Code, Name, Continent, Region, Population, Capital "
                             + " FROM country "
+                            + " ORDER BY Population DESC "
                             + " LIMIT "+n+"";
 
             // Execute SQL statement
@@ -812,7 +816,7 @@ public class App {
             ArrayList<Country> countries = new ArrayList<Country>();
             while (rset.next()) {
                 Country country = new Country();
-                country.CountryCode = rset.getString("CountryCode");
+                country.Code = rset.getString("Code");
                 country.Name = rset.getString("Name");
                 country.Continent = rset.getString("Continent");
                 country.Region = rset.getString("Region");
@@ -853,10 +857,9 @@ public class App {
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT CountryCode, Name, Continent, Region, Population, Capital "
+                    "SELECT Code, Name, Continent, Region, Population, Capital "
                             + " FROM country "
-                            + " WHERE CountryCode = country.Code "
-                            + " AND Continent = '"+continent+"' "
+                            + " WHERE Continent = '"+continent+"' "
                             + " ORDER BY Population DESC "
                             + " LIMIT "+n+" ";
 
@@ -866,7 +869,7 @@ public class App {
             ArrayList<Country> countries = new ArrayList<Country>();
             while (rset.next()) {
                 Country country = new Country();
-                country.CountryCode = rset.getString("CountryCode");
+                country.Code = rset.getString("Code");
                 country.Name = rset.getString("Name");
                 country.Continent = rset.getString("Continent");
                 country.Region = rset.getString("Region");
@@ -907,10 +910,9 @@ public class App {
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT CountryCode, Name, Continent, Region, Population, Capital "
+                    "SELECT Code, Name, Continent, Region, Population, Capital "
                             + " FROM country "
-                            + " WHERE CountryCode = country.Code "
-                            + " AND Region = '"+region+"' "
+                            + " WHERE Region = '"+region+"' "
                             + " ORDER BY Population DESC "
                             + " LIMIT "+n+" ";
 
@@ -920,7 +922,7 @@ public class App {
             ArrayList<Country> countries = new ArrayList<Country>();
             while (rset.next()) {
                 Country country = new Country();
-                country.CountryCode = rset.getString("CountryCode");
+                country.Code = rset.getString("Code");
                 country.Name = rset.getString("Name");
                 country.Continent = rset.getString("Continent");
                 country.Region = rset.getString("Region");
