@@ -39,7 +39,6 @@ jobs:
           docker stop world
           docker rm world
           docker image rm database
-
     name: Build and Start Using docker-compose
     runs-on: ubuntu-20.04
     steps:
