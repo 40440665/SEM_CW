@@ -48,10 +48,12 @@ public class App {
         //ArrayList<City> cities = Test.NPopulatedCitiesInADistrict(6, "California");
 
         //Display top N populated cities in a country
-        ArrayList<City> cities = Test.getNCitiesInACountry(3, "France");
+        //ArrayList<City> cities = Test.getNCitiesInACountry(3, "France");
+
+        ArrayList<City> capitalCities = Test.capitalCities();
 
         //Print the cities
-        Test.printCities(cities);
+        Test.printCities(capitalCities);
 
         //Disconnect from database
         Test.disconnect();
@@ -580,6 +582,40 @@ public class App {
                             + " WHERE District='"+district+"' "
                             + " ORDER BY Population DESC"
                             + " LIMIT "+n+"";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract city information
+            ArrayList<City> cities = new ArrayList<City>();
+            while (rset.next()) {
+                City city = new City();
+                city.Name = rset.getString("Name");
+                city.CountryCode = rset.getString("CountryCode");
+                city.District = rset.getString("District");
+                city.Population = rset.getInt("Population");
+                cities.add(city);
+            }
+            return cities;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get cities");
+            return null;
+        }
+    }
+
+    //Filters out the non-capital cities of each country
+    public ArrayList<City> capitalCities() {
+        try {
+            // Create SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "  SELECT city.ID, city.name, country.name, city.population "
+                            +  " FROM city, country "
+                            +  " WHERE city.CountryCode = country.code "
+                            +  " AND city.ID IN (SELECT capital FROM country ) ";
+
+
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
