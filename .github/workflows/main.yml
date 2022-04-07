@@ -39,7 +39,6 @@ jobs:
           docker stop world
           docker rm world
           docker image rm database
-
       - name: CodeCov
           uses: codecov/codecov-action@v2
           with:
