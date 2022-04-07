@@ -13,3 +13,16 @@ __Release__ ![GitHub release (latest by date including pre-releases)](https://im
 ```
 Welcome to our README file
 ```
+
+
+
+```
+Final Deliverable
+```
+
+
+| ID    | Name | Met  | Screenshot |
+|-------|------|------|------------|
+| 1     | All the countries in the world organised by largest population to smallest. | Yes | image |
+| 2     | All the countries in a continent organised by largest population to smallest. | No |   |
+| 3     | All the countries in a region organised by largest population to smallest. | Yes | image |
