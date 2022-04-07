@@ -62,7 +62,7 @@ public class App {
         //ArrayList<Country> countries = Test.countriesByPopulation();
 
         //Displays countries in a continent
-        //ArrayList<Country> countries = Test.countriesByContinent("Europe");
+        ArrayList<Country> countries = Test.countriesByContinent("Europe");
 
         //Display countries in a region
         //ArrayList<Country> countries = Test.countriesByRegion("Caribbean");
@@ -74,7 +74,7 @@ public class App {
         //ArrayList<Country> countries = Test.nPopulatedCountriesInAContinent(3,"Europe");
 
         //Display top N populated countries in a region
-        ArrayList<Country> countries = Test.nPopulatedCountriesInARegion(4, "Caribbean");
+        //ArrayList<Country> countries = Test.nPopulatedCountriesInARegion(4, "Caribbean");
 
         // INVOKE PRINT METHODS
 
