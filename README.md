@@ -10,6 +10,8 @@ __License__ ![GitHub](https://img.shields.io/github/license/40440665/SEM_CW?styl
 
 __Release__ ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/40440665/SEM_CW?include_prereleases)
 
+__Code Coverage Information__ [![codecov](https://codecov.io/gh/40440665/SEM_CW/branch/master/graph/badge.svg?token=LHT5MFI2OP)](https://codecov.io/gh/40440665/SEM_CW)
+
 ```
 Welcome to our README file
 ```
