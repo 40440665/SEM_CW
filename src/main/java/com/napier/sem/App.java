@@ -100,20 +100,21 @@ public class App {
         }
 
         // Connection to the database
+        Connection con = null;
         int retries = 100;
         for (int i = 0; i < retries; ++i) {
             System.out.println("Connecting to database...");
             try {
                 // Wait a bit for db to start
                 //Changing to '0' allows for fast connection with localhost:33060 [Originally 30000]
-                Thread.sleep(delay);
+                Thread.sleep(30000);
 
                 // Connect to database
                 // "localhost:33060" Makes a fast connection to the database. [Originally db:3306]
                 con = DriverManager.getConnection("jdbc:mysql://" + location + "/world?allowPublicKeyRetrieval=true&useSSL=false", "root", "example");
                 System.out.println("Successfully connected");
                 // Wait a bit
-                Thread.sleep(delay);
+                Thread.sleep(10000);
                 // Exit for loop
                 break;
             } catch (SQLException sqle) {
@@ -787,7 +788,7 @@ public class App {
         }
     }
 
- 
+
        /**
      * Prints a top list of N countries in the world based on the input from the user.
      * taking in
@@ -804,7 +805,7 @@ public class App {
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
-            String strSelect = 
+            String strSelect =
                     "SELECT Code, Name, Continent, Region, Population, Capital "
                             + " FROM country "
                             + " ORDER BY Population DESC "
@@ -831,7 +832,7 @@ public class App {
             return null;
         }
     }
-    
+
     /**
      * Prints a top list of N countries in a continent sorted by population
      * taking in
@@ -936,5 +937,5 @@ public class App {
             System.out.println("Failed to get Country details");
             return null;
         }
-    }    
+    }
 }

@@ -10,6 +10,21 @@ __License__ ![GitHub](https://img.shields.io/github/license/40440665/SEM_CW?styl
 
 __Release__ ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/40440665/SEM_CW?include_prereleases)
 
+__Code Coverage Information__ [![codecov](https://codecov.io/gh/40440665/SEM_CW/branch/master/graph/badge.svg?token=LHT5MFI2OP)](https://codecov.io/gh/40440665/SEM_CW)
+
 ```
 Welcome to our README file
 ```
+
+
+
+```
+Final Deliverable
+```
+
+
+| ID    | Name | Met  | Screenshot |
+|-------|------|------|------------|
+| 1     | All the countries in the world organised by largest population to smallest. | Yes | image |
+| 2     | All the countries in a continent organised by largest population to smallest. | No |   |
+| 3     | All the countries in a region organised by largest population to smallest. | Yes | image |
