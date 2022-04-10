@@ -15,10 +15,7 @@ public class App {
 
         //Connect to database
         if(args.length < 1){
-            //Slow Connection
-            Test.connect("db:3306", 30000);
-            //Fast Connection
-            //Test.connect("localhost:33060", 0);
+            Test.connect("localhost:33060", 30000);
         }else{
             Test.connect(args[0], Integer.parseInt(args[1]));
         }
@@ -107,14 +104,14 @@ public class App {
             try {
                 // Wait a bit for db to start
                 //Changing to '0' allows for fast connection with localhost:33060 [Originally 30000]
-                Thread.sleep(30000);
+                Thread.sleep(delay);
 
                 // Connect to database
                 // "localhost:33060" Makes a fast connection to the database. [Originally db:3306]
                 con = DriverManager.getConnection("jdbc:mysql://" + location + "/world?allowPublicKeyRetrieval=true&useSSL=false", "root", "example");
                 System.out.println("Successfully connected");
                 // Wait a bit
-                Thread.sleep(10000);
+                Thread.sleep(delay);
                 // Exit for loop
                 break;
             } catch (SQLException sqle) {
@@ -158,7 +155,7 @@ public class App {
         }
 
         // Print header
-        System.out.println(String.format("%-40s %-15s %-20s %-8s", "Name", "CountryCode", "District", "Population"));
+        System.out.println(String.format("%-40s %-15s %-20s %-8s", "Name", "Country Code", "District", "Population"));
 
         // Loop over all cities in the list
         for (City city : cities) {
@@ -324,6 +321,48 @@ public class App {
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get salary details");
+            return null;
+        }
+    }
+
+    /**
+     * Prints a top list of N cities in the world based on the input from the user.
+     * taking in
+     * @param n number of cities that we want to display
+     */
+    public ArrayList<City> nPopulatedCities(int n) {
+        try {
+            //Check if n is 0
+            if (n == 0)
+            {
+                System.out.println("n is 0");
+                return null;
+            }
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT Name, CountryCode, District, Population "
+                            + " FROM city "
+                            + " ORDER BY Population DESC "
+                            + " LIMIT "+n+"";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract city information
+            ArrayList<City> cities = new ArrayList<City>();
+            while (rset.next()) {
+                City city = new City();
+                city.Name = rset.getString("Name");
+                city.CountryCode = rset.getString("CountryCode");
+                city.District = rset.getString("District");
+                city.Population = rset.getInt("Population");
+                cities.add(city);
+            }
+            return cities;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get cities");
             return null;
         }
     }
