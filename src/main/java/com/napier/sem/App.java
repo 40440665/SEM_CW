@@ -48,10 +48,13 @@ public class App {
         //ArrayList<City> cities = Test.nPopulatedCitiesInADistrict(6, "California");
 
         //Display top N populated cities in a country
-        ArrayList<City> cities = Test.nPopulatedCitiesInACountry(3, "France");
+        //ArrayList<City> cities = Test.nPopulatedCitiesInACountry(3, "France");
+
+        //Print world population
+        Test.worldPopulation();
 
         //Print the cities
-        Test.printCities(cities);
+        //Test.printCities(cities);
 
         //Disconnect from database
         Test.disconnect();
@@ -599,5 +602,29 @@ public class App {
             System.out.println("Failed to get cities");
             return null;
         }
+    }
+
+
+    public void worldPopulation() {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT  SUM(population) "
+                            + "FROM country ";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract population information
+            int worldPop = rset.getInt("World Population");
+
+            System.out.println("World population is " + worldPop);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city details");
+            return null;
+        }  
     }
 }
