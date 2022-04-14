@@ -50,12 +50,10 @@ public class App {
         //Display top N populated cities in a country
         //ArrayList<City> cities = Test.nPopulatedCitiesInACountry(3, "France");
 
-        String populationOutput = Test.worldPop();
+        String populationOutput = Test.worldPopulation();
 
         System.out.println(populationOutput);
 
-        //Print world population
-        Test.worldPopulation();
 
         //Print the cities
         //Test.printCities(cities);
@@ -609,7 +607,7 @@ public class App {
     }
 
 
-    public void worldPopulation() {
+    public String worldPopulation() {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
