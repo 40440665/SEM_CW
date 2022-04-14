@@ -618,7 +618,7 @@ public class App {
             ResultSet rset = stmt.executeQuery(strSelect);
             // Extract population information
             rset.next();
-            int worldPop = rset.getInt(1);
+            long worldPop = rset.getLong(1);
 
             System.out.println("World population is " + worldPop);
 
