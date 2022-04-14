@@ -50,6 +50,10 @@ public class App {
         //Display top N populated cities in a country
         //ArrayList<City> cities = Test.nPopulatedCitiesInACountry(3, "France");
 
+        String populationOutput = Test.worldPop();
+
+        System.out.println(populationOutput);
+
         //Print world population
         Test.worldPopulation();
 
@@ -611,8 +615,8 @@ public class App {
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT  SUM(population) AS population "
-                            + "FROM country ";
+                    "SELECT  SUM(Population) AS Population "
+                            + " FROM country ";
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -620,11 +624,173 @@ public class App {
             rset.next();
             long worldPop = rset.getLong(1);
 
-            System.out.println("World population is " + worldPop);
+            String worldPopString = "World population is " + worldPop;
+            return worldPopString;
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get city details");
+            return null;
+        }  
+    }
+
+    public String continentPopulation(String continent) {
+        try {
+            //Check if continent is null
+            if (continent == null)
+            {
+                System.out.println("Continent is null");
+                return null;
+            }
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT  Continent, SUM(Population) AS Population "
+                            + " FROM country "
+                            + " WHERE Continent= '" + continent + "' ";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract population information
+            rset.next();
+            long continentPop = rset.getLong(1);
+            
+            String continentPopString = continent + "'s population is " + continentPop;
+            return continentPopString;
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get continent details");
+            return null;
+        }  
+    }
+
+    public String regionPopulation(String region) {
+        try {
+            //Check if region is null
+            if (region == null)
+            {
+                System.out.println("Region is null");
+                return null;
+            }
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT Region, SUM(population) AS Population, "
+                            + "FROM country "
+                            + " WHERE Region = '" + region + "' ";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract population information
+            rset.next();
+            long regionPop = rset.getLong(1);
+            
+            String regionPopString = region + "'s population is " + regionPop;
+            return regionPopString;
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get region details");
+            return null;
+        }  
+    }
+
+    public String countryPopulation(String country) {
+        try {
+            //Check if country is null
+            if (country == null)
+            {
+                System.out.println("Country is null");
+                return null;
+            }
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT  SUM(Population) AS Population "
+                            + "FROM country "
+                            + " WHERE Name = '" + country + "' ";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract population information
+            rset.next();
+            long countryPop = rset.getLong(1);
+            
+            String countryPopString = country + "'s population is " + countryPop;
+            return countryPopString;
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get country details");
+            return null;
+        }  
+    }
+
+    public String districtPopulation(String district) {
+        try {
+            //Check if district is null
+            if (district == null)
+            {
+                System.out.println("District is null");
+                return null;
+            }
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT  SUM(population) AS Population "
+                            + " FROM city "
+                            + " WHERE District = '" + district + "' ";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract population information
+            rset.next();
+            long districtPop = rset.getLong(1);
+            
+            String districtPopString = district + "'s population is " + districtPop;
+            return districtPopString;
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city details");
+            return null;
+        }  
+    }
+
+    public String cityPopulation(String city) {
+        try {
+            //Check if city is null
+            if (city == null)
+            {
+                System.out.println("City is null");
+                return null;
+            }
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT  SUM(population) AS population "
+                            + "FROM city "
+                            + " WHERE Name = '" + city + "' ";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract population information
+            rset.next();
+            long cityPop = rset.getLong(1);
+            
+            String cityPopString = city + "'s population is " + cityPop;
+            return cityPopString;
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city details");
+            return null;
         }  
     }
 }
