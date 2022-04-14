@@ -676,7 +676,7 @@ public class App {
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT Region, SUM(population) AS Population, "
+                    "SELECT SUM(population) AS Population "
                             + "FROM country "
                             + " WHERE Region = '" + region + "' ";
 
