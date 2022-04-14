@@ -617,7 +617,7 @@ public class App {
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Extract population information
-            rset.next()
+            rset.next();
             int worldPop = rset.getInt(1);
 
             System.out.println("World population is " + worldPop);
