@@ -611,13 +611,13 @@ public class App {
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT  SUM(population) "
+                    "SELECT  SUM(population) AS population "
                             + "FROM country ";
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Extract population information
-            int worldPop = rset.getInt("World Population");
+            int worldPop = rset.getInt("population");
 
             System.out.println("World population is " + worldPop);
 
