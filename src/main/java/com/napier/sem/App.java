@@ -50,7 +50,7 @@ public class App {
         //Display top N populated cities in a country
         //ArrayList<City> cities = Test.nPopulatedCitiesInACountry(3, "France");
 
-        String populationOutput = Test.continentPopulation("Europe");
+        String populationOutput = Test.regionPopulation("Caribbean");
 
         System.out.println(populationOutput);
 
@@ -644,9 +644,9 @@ public class App {
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT  Continent, SUM(Population) AS Population "
+                    "SELECT SUM(Population) AS Population "
                             + " FROM country "
-                            + " WHERE Continent= '" + continent + "' ";
+                            + " WHERE continent= '"+continent+"' ";
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
