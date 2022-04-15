@@ -50,7 +50,7 @@ public class App {
         //Display top N populated cities in a country
         //ArrayList<City> cities = Test.nPopulatedCitiesInACountry(3, "France");
 
-        String populationOutput = Test.regionPopulation("Carribean");
+        String populationOutput = Test.regionPopulation("Caribbean");
 
         System.out.println(populationOutput);
 
