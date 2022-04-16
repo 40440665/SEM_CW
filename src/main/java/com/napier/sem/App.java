@@ -155,7 +155,7 @@ public class App {
      */
     public void printPopulation(Population report) {
         // Print header
-        System.out.println(String.format("%-40s %-15s %-20s %-8s &-8s %-8s", "Name", "Population", "Population Living in Cities", "Percentage of Population Living in Cities", "Population not Living in Cities", "Percentage of Population not Living in Cities"));
+        System.out.println(String.format("%-40s %-15s %-20s %-8s %-8s %-8s", "Name", "Population", "Population Living in Cities", "Percentage of Population Living in Cities", "Population not Living in Cities", "Percentage of Population not Living in Cities"));
 
         //Formatting the rows that will come under the header
         String population_string =
