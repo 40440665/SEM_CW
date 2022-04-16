@@ -50,9 +50,9 @@ public class App {
         //Display top N populated cities in a country
         //ArrayList<City> cities = Test.nPopulatedCitiesInACountry(3, "France");
 
-        String populationOutput = Test.cityPopulation("London");
+        Population report = Test.countryPopulation("GBR");
 
-        System.out.println(populationOutput);
+        Test.printPopulation(report);
 
 
         //Print the cities
@@ -148,6 +148,21 @@ public class App {
         }
     }
 
+    /**
+     * Prints a population report
+     *
+     * @param report The list 
+     */
+    public void printPopulation(Population report) {
+        // Print header
+        System.out.println(String.format("%-40s %-15s %-20s %-8s &-8s %-8s", "Name", "Population", "Population Living in Cities", "Percentage of Population Living in Cities", "Population not Living in Cities", "Percentage of Population not Living in Cities"));
+
+        //Formatting the rows that will come under the header
+        String population_string =
+            String.format("%-40s %-15s %-20s %-8s %-8s %-8s",
+                report.Name, report.Population, report.PopulationInCities, report.PercentInCities, report.PopulationNotInCities, report.PercentNotInCities);
+        System.out.println(population_string);
+    }
 
     /**
      * Sorts all cities in the world by population
@@ -632,7 +647,7 @@ public class App {
         }  
     }
 
-    public String continentPopulation(String continent) {
+    public Population continentPopulation(String continent) {
         try {
             //Check if continent is null
             if (continent == null)
@@ -651,11 +666,15 @@ public class App {
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Extract population information
-            rset.next();
-            long continentPop = rset.getLong(1);
+            Population report = new Population();
+            report.Name = rset.getString("Name");
+            report.Population = rset.getInt("Population");
+            report.PopulationInCities = rset.getInt("Population Living in Cities");
+            report.PercentInCities = rset.getDouble("Percentage of Population Living in Cities");
+            report.PopulationNotInCities = rset.getInt("Population not Living in Cities");
+            report.PercentNotInCities = rset.getDouble("Percentage of Population not Living in Cities");
             
-            String continentPopString = continent + "'s population is " + continentPop;
-            return continentPopString;
+            return report;
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -664,7 +683,7 @@ public class App {
         }  
     }
 
-    public String regionPopulation(String region) {
+    public Population regionPopulation(String region) {
         try {
             //Check if region is null
             if (region == null)
@@ -683,11 +702,15 @@ public class App {
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Extract population information
-            rset.next();
-            long regionPop = rset.getLong(1);
+            Population report = new Population();
+            report.Name = rset.getString("Name");
+            report.Population = rset.getInt("Population");
+            report.PopulationInCities = rset.getInt("Population Living in Cities");
+            report.PercentInCities = rset.getDouble("Percentage of Population Living in Cities");
+            report.PopulationNotInCities = rset.getInt("Population not Living in Cities");
+            report.PercentNotInCities = rset.getDouble("Percentage of Population not Living in Cities");
             
-            String regionPopString = region + "'s population is " + regionPop;
-            return regionPopString;
+            return report;
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -696,7 +719,7 @@ public class App {
         }  
     }
 
-    public String countryPopulation(String country) {
+    public Population countryPopulation(String country) {
         try {
             //Check if country is null
             if (country == null)
@@ -708,18 +731,25 @@ public class App {
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT  SUM(Population) AS Population "
-                            + "FROM country "
-                            + " WHERE Name = '" + country + "' ";
+                    " SELECT Name, Population, "
+                        + " (SELECT SUM(population) FROM city WHERE countryCode = '" + country + "') AS 'Population Living in Cities', "
+                        + " ROUND(((SELECT SUM(population) FROM city WHERE CountryCode = '" + country + "') / Population)*100,1) AS 'Percentage of Population Living in Cities', "
+                        + " (Population - (SELECT SUM(population) FROM city WHERE countryCode = '" + country + "')) AS 'Population not Living in Cities', "
+                        + " ROUND(((Population - (SELECT SUM(population) FROM city WHERE countryCode = '" + country + "')) / Population)*100, 1) AS 'Percentage of Population not Living in Cities' "
+                        + " FROM country WHERE Code = '" + country + "' ";
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Extract population information
-            rset.next();
-            long countryPop = rset.getLong(1);
+            Population report = new Population();
+            report.Name = rset.getString("Name");
+            report.Population = rset.getInt("Population");
+            report.PopulationInCities = rset.getInt("Population Living in Cities");
+            report.PercentInCities = rset.getDouble("Percentage of Population Living in Cities");
+            report.PopulationNotInCities = rset.getInt("Population not Living in Cities");
+            report.PercentNotInCities = rset.getDouble("Percentage of Population not Living in Cities");
             
-            String countryPopString = country + "'s population is " + countryPop;
-            return countryPopString;
+            return report;
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
