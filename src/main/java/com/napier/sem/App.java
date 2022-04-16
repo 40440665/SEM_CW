@@ -159,7 +159,7 @@ public class App {
 
         //Formatting the rows that will come under the header
         String population_string =
-            String.format("%-40s %-15s %-20s %-8s %-8s %-8s",
+            String.format("%-10s %-15s %-10s %-10s %-10s %-10s",
                 report.Name, report.Population, report.PopulationInCities, report.PercentInCities, report.PopulationNotInCities, report.PercentNotInCities);
         System.out.println(population_string);
     }
@@ -742,6 +742,7 @@ public class App {
             ResultSet rset = stmt.executeQuery(strSelect);
             // Extract population information
             Population report = new Population();
+            rset.next();
             report.Name = rset.getString("Name");
             report.Population = rset.getInt("Population");
             report.PopulationInCities = rset.getInt("Population Living in Cities");
