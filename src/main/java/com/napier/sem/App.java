@@ -670,6 +670,7 @@ public class App {
             ResultSet rset = stmt.executeQuery(strSelect);
             // Extract population information
             Population report = new Population();
+            rset.next();
             report.Name = rset.getString("Name");
             report.Population = rset.getInt("Population");
             report.PopulationInCities = rset.getInt("Population Living in Cities");
