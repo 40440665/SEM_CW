@@ -50,7 +50,7 @@ public class App {
         //Display top N populated cities in a country
         //ArrayList<City> cities = Test.nPopulatedCitiesInACountry(3, "France");
 
-        Population report = Test.countryPopulation("GBR");
+        Population report = Test.RegionPopulation("Caribbean");
 
         Test.printPopulation(report);
 
