@@ -50,7 +50,7 @@ public class App {
         //Display top N populated cities in a country
         //ArrayList<City> cities = Test.nPopulatedCitiesInACountry(3, "France");
 
-        Population report = Test.regionPopulation("Caribbean");
+        Population report = Test.continentPopulation("Europe");
 
         Test.printPopulation(report);
 
@@ -659,9 +659,12 @@ public class App {
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT SUM(Population) AS Population "
-                            + " FROM country "
-                            + " WHERE continent= '"+continent+"' ";
+                    "SELECT Continent, SUM(Population) AS Population, "
+                        + " (SELECT SUM(city.Population) FROM city, country WHERE city.CountryCode = country.Code AND country.Continent = '" + continent+ "') AS 'Population Living in Cities', "
+                        + " ROUND(((SELECT SUM(city.Population) FROM city, country WHERE city.CountryCode = country.Code AND country.Continent = '" + continent+ "') / (SUM(country.Population)))*100,1) AS 'Percentage of Population Living in Cities', "
+                        + " (SUM(country.Population) - (SELECT SUM(city.Population) FROM city, country WHERE city.CountryCode = country.Code AND country.Continent = '" + continent+ "')) AS 'Population not Living in cities', "
+                        + " ROUND((((SUM(country.Population)) - (SELECT SUM(city.Population) FROM city, country WHERE city.CountryCode = country.Code AND country.Continent = '" + continent+ "')) / SUM(country.Population))*100, 1) AS 'Percentage of Population not Living in Cities' "
+                        + "FROM country WHERE Continent = '" + continent+ "' ";
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
