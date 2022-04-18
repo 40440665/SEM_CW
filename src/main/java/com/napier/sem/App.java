@@ -696,11 +696,11 @@ public class App {
             // Create string for SQL statement
             String strSelect =
                     "SELECT country.Region AS Name, SUM(country.Population) AS Population, "
-                        + " (SELECT SUM(city.Population) FROM city, country WHERE city.CountryCode = country.Code AND country.Region = 'Caribbean') AS 'Population Living in Cities', "
-                        + " ROUND(((SELECT SUM(city.Population) FROM city, country WHERE city.CountryCode = country.Code AND country.Region = 'Caribbean') / (SUM(country.Population)))*100,1) AS 'Percentage of Population Living in Cities', "
-                        + " (SUM(country.Population) - (SELECT SUM(city.Population) FROM city, country WHERE city.CountryCode = country.Code AND Region = 'Caribbean')) AS 'Population not Living in cities', "
-                        + " ROUND((((SUM(country.Population)) - (SELECT SUM(city.Population) FROM city, country WHERE city.CountryCode = country.Code AND country.Region = 'Caribbean')) / SUM(country.Population))*100, 1) AS 'Percentage of Population not Living in Cities' "
-                        + " FROM country WHERE Region = 'Caribbean' ";
+                        + " (SELECT SUM(city.Population) FROM city, country WHERE city.CountryCode = country.Code AND country.Region = '" + region + "') AS 'Population Living in Cities', "
+                        + " ROUND(((SELECT SUM(city.Population) FROM city, country WHERE city.CountryCode = country.Code AND country.Region = '" + region + "') / (SUM(country.Population)))*100,1) AS 'Percentage of Population Living in Cities', "
+                        + " (SUM(country.Population) - (SELECT SUM(city.Population) FROM city, country WHERE city.CountryCode = country.Code AND Region = '" + region + "')) AS 'Population not Living in cities', "
+                        + " ROUND((((SUM(country.Population)) - (SELECT SUM(city.Population) FROM city, country WHERE city.CountryCode = country.Code AND country.Region = '" + region + "')) / SUM(country.Population))*100, 1) AS 'Percentage of Population not Living in Cities' "
+                        + " FROM country WHERE Region = '" + region + "' ";
                     
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
