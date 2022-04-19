@@ -52,7 +52,7 @@ public class App {
 
         ArrayList<Language> languageReports = Test.languageReport();
 
-        Test.printLanguages(languagesReports);
+        Test.printLanguages(languageReports);
 
         //Print the cities
         //Test.printCities(cities);
