@@ -48,10 +48,14 @@ public class App {
         //ArrayList<City> cities = Test.nPopulatedCitiesInADistrict(6, "California");
 
         //Display top N populated cities in a country
-        ArrayList<City> cities = Test.nPopulatedCitiesInACountry(3, "France");
+        //ArrayList<City> cities = Test.nPopulatedCitiesInACountry(3, "France");
+
+        Language languagesReport = Test.languageReport();
+
+        Test.printLangauges(languagesReport);
 
         //Print the cities
-        Test.printCities(cities);
+        //Test.printCities(cities);
 
         //Disconnect from database
         Test.disconnect();
@@ -141,6 +145,22 @@ public class App {
                             city.Name, city.CountryCode, city.District, city.Population);
             System.out.println(city_string);
         }
+    }
+
+        /**
+     * Prints a langauges report
+     *
+     * @param report The list 
+     */
+    public void printLangauges(Language report) {
+        // Print header
+        System.out.println(String.format("%-40s %-15s %-20s %-8s %-8s %-8s", "Name", "Population", "Population Living in Cities", "Percentage of Population Living in Cities", "Population not Living in Cities", "Percentage of Population not Living in Cities"));
+
+        //Formatting the rows that will come under the header
+        String population_string =
+            String.format("%-10s %-15s %-10s %-10s %-10s %-10s",
+                report.Name, report.Population, report.PopulationInCities, report.PercentInCities, report.PopulationNotInCities, report.PercentNotInCities);
+        System.out.println(population_string);
     }
 
 
@@ -599,5 +619,38 @@ public class App {
             System.out.println("Failed to get cities");
             return null;
         }
+    }
+
+    public Language languageReport() {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    " SELECT Language, "
+                        + " ROUND(SUM((Population/100) * Percentage)) AS Speakers, "
+                        + " ROUND(((SUM((Population/100) * Percentage)) / (SELECT SUM(Population) FROM country)) * 100, 2) AS 'Percentage of World Population' "
+                        + " FROM countrylanguage, country "
+                        + " WHERE countrylanguage.CountryCode = country.Code "
+                        + " GROUP BY Language "
+                        + " ORDER BY ROUND(SUM((Population/100) * Percentage)) DESC "
+                        + " LIMIT 5 ";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract population information
+            Language languageReport = new Language();
+            rset.next();
+            languageReport.Language = rset.getString("Language");
+            languageReport.Population = rset.getInt("Speakers");
+            languageReport.PopulationInCities = rset.getDouble("Percentage of World Population");
+            
+            return languageReport;
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get language details");
+            return null;
+        }  
     }
 }
