@@ -50,9 +50,9 @@ public class App {
         //Display top N populated cities in a country
         //ArrayList<City> cities = Test.nPopulatedCitiesInACountry(3, "France");
 
-        Language languagesReport = Test.languageReport();
+        ArrayList<Language> languageReports = Test.languageReport();
 
-        Test.printLanguages(languagesReport);
+        Test.printLanguages(languagesReports);
 
         //Print the cities
         //Test.printCities(cities);
@@ -148,19 +148,27 @@ public class App {
     }
 
         /**
-     * Prints a langauges report
+     * Prints a languages report
      *
      * @param report The list 
      */
-    public void printLanguages(Language languagesReport) {
+    public void printLanguages(ArrayList<Language> languageReports) {
         // Print header
         System.out.println(String.format("%-10s %-10s %-10s", "Language", "Speakers", "Percentage of World Population"));
+        
+        // Loop over all cities in the list
+        for (Language languageReport : languageReports) {
+            if (languageReport == null)
+            {
+                continue;
+            }
 
-        //Formatting the rows that will come under the header
-        String languages_string =
-            String.format("%-10s %-10s %-10s",
-                languagesReport.Language, languagesReport.Speakers, languagesReport.PercentageOfWorldPopulation);
-        System.out.println(languages_string);
+            //Formatting the rows that will come under the header
+            String languages_string =
+                String.format("%-10s %-10s %-10s",
+                    languageReport.Language, languageReport.Speakers, languageReport.PercentageOfWorldPopulation);
+            System.out.println(languages_string);
+        }
     }
 
 
@@ -621,7 +629,7 @@ public class App {
         }
     }
 
-    public Language languageReport() {
+    public ArrayList<Language> languageReport() {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -639,13 +647,16 @@ public class App {
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Extract population information
-            Language languageReport = new Language();
-            rset.next();
-            languageReport.Language = rset.getString("Language");
-            languageReport.Speakers = rset.getInt("Speakers");
-            languageReport.PercentageOfWorldPopulation = rset.getDouble("Percentage of World Population");
+            ArrayList<Language> languageReports = new ArrayList<Language>();
             
-            return languageReport;
+            while (rset.next()) {
+                Language languageReport = new Language();
+                languageReport.Language = rset.getString("Language");
+                languageReport.Speakers = rset.getInt("Speakers");
+                languageReport.PercentageOfWorldPopulation = rset.getDouble("Percentage of World Population");
+                languageReports.add(languageReport);
+            }            
+            return languageReports;
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
