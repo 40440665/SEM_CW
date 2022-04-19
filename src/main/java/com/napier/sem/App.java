@@ -52,7 +52,7 @@ public class App {
 
         Language languagesReport = Test.languageReport();
 
-        Test.printLangauges(languagesReport);
+        Test.printLanguages(languagesReport);
 
         //Print the cities
         //Test.printCities(cities);
@@ -152,15 +152,15 @@ public class App {
      *
      * @param report The list 
      */
-    public void printLangauges(Language report) {
+    public void printLanguages(Language languagesReport) {
         // Print header
-        System.out.println(String.format("%-40s %-15s %-20s %-8s %-8s %-8s", "Name", "Population", "Population Living in Cities", "Percentage of Population Living in Cities", "Population not Living in Cities", "Percentage of Population not Living in Cities"));
+        System.out.println(String.format("%-10s %-10s %-10s", "Language", "Speakers", "Percentage of World Population"));
 
         //Formatting the rows that will come under the header
-        String population_string =
-            String.format("%-10s %-15s %-10s %-10s %-10s %-10s",
-                report.Name, report.Population, report.PopulationInCities, report.PercentInCities, report.PopulationNotInCities, report.PercentNotInCities);
-        System.out.println(population_string);
+        String languages_string =
+            String.format("%-10s %-10s %-10s",
+                languagesReport.Language, languagesReport.Speakers, languagesReport.PercentageOfWorldPopulation);
+        System.out.println(languages_string);
     }
 
 
