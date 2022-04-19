@@ -50,9 +50,10 @@ public class App {
         //Display top N populated cities in a country
         //ArrayList<City> cities = Test.nPopulatedCitiesInACountry(3, "France");
 
-        Population report = Test.continentPopulation("Europe");
+        //Population report = Test.continentPopulation("Europe");
 
-        Test.printPopulation(report);
+        System.out.println(Test.worldPopulation());
+        //Test.printPopulation(report);
 
 
         //Print the cities
