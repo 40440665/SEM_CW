@@ -642,8 +642,8 @@ public class App {
             Language languageReport = new Language();
             rset.next();
             languageReport.Language = rset.getString("Language");
-            languageReport.Population = rset.getInt("Speakers");
-            languageReport.PopulationInCities = rset.getDouble("Percentage of World Population");
+            languageReport.Speakers = rset.getInt("Speakers");
+            languageReport.PercentageOfWorldPopulation = rset.getDouble("Percentage of World Population");
             
             return languageReport;
 
