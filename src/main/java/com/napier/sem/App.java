@@ -93,7 +93,7 @@ public class App {
         //Population populationReport = Test.regionPopulation("Caribbean");
 
         //Display the population statistics of a country
-        Population populationReport = Test.countryPopulation("FRA");
+        //Population populationReport = Test.countryPopulation("FRA");
 
         //Display the population statistics of a district
         //String districtPop = Test.districtPopulation("California");
@@ -116,7 +116,7 @@ public class App {
         //Test.printCountries(countries);
 
         //Print the population reports
-        Test.printPopulation(populationReport);
+        //Test.printPopulation(populationReport);
 
         //Print the cities
         //Test.printCities(cities);
@@ -266,7 +266,7 @@ public class App {
     public void printLanguages(ArrayList<Language> languageReports) {
         // Print header
         System.out.println(String.format("%-10s %-10s %-10s", "Language", "Speakers", "Percentage of World Population"));
-        
+
         // Loop over all cities in the list
         for (Language languageReport : languageReports) {
             if (languageReport == null)
@@ -1247,20 +1247,20 @@ public class App {
             ResultSet rset = stmt.executeQuery(strSelect);
             // Extract population information
             ArrayList<Language> languageReports = new ArrayList<Language>();
-            
+
             while (rset.next()) {
                 Language languageReport = new Language();
                 languageReport.Language = rset.getString("Language");
                 languageReport.Speakers = rset.getInt("Speakers");
                 languageReport.PercentageOfWorldPopulation = rset.getDouble("Percentage of World Population");
                 languageReports.add(languageReport);
-            }            
+            }
             return languageReports;
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get language details");
             return null;
-        }  
+        }
     }
 }
