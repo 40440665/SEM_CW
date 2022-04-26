@@ -600,4 +600,215 @@ public class App {
             return null;
         }
     }
+
+
+    /**
+     * Sorts all capital cities in the world by population
+     */
+    public ArrayList<CapitalCity> capitalCitiesByPopulation() {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT Name, CountryCode, Population "
+                            + " FROM city "
+                            + " ORDER BY Population DESC";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract city information
+            ArrayList<CapitalCity> capitalCities = new ArrayList<CapitalCity>();
+            while (rset.next()) {
+                CapitalCity capitalCity = new CapitalCity();
+                capitalCity.Name = rset.getString("Name");
+                capitalCity.CountryCode = rset.getString("CountryCode");
+                capitalCity.Population = rset.getInt("Population");
+                capitalCities.add(capitalCity);
+            }
+            return capitalCities;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get cities");
+            return null;
+        }
+    }
+
+
+    /**
+     * Sorts all capital cities in a continent by population
+     */
+    public ArrayList<CapitalCity> capitalCitiesByContinent(String continent) {
+        try {
+            //Check if region is null
+            if (continent == null)
+            {
+                System.out.println("region is null");
+                return null;
+            }
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT Name, CountryCode, District, Population "
+                            + " FROM city "
+                            + " ORDER BY Population DESC";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract city information
+            ArrayList<CapitalCity> capitalCities = new ArrayList<CapitalCity>();
+            while (rset.next()) {
+                CapitalCity capitalCity = new CapitalCity();
+                capitalCity.Name = rset.getString("Name");
+                capitalCity.CountryCode = rset.getString("CountryCode");
+                capitalCity.Population = rset.getInt("Population");
+                capitalCities.add(capitalCity);
+            }
+            return capitalCities;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get cities");
+            return null;
+        }
+    }
+
+
+    /**
+     * Sorts all capital cities in a region by population
+     */
+    public ArrayList<CapitalCity> capitalCitiesByRegion(String region) {
+        try {
+            //Check if region is null
+            if (region == null)
+            {
+                System.out.println("region is null");
+                return null;
+            }
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT Name, CountryCode, Population "
+                            + " FROM city "
+                            + " ORDER BY Population DESC";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract city information
+            ArrayList<CapitalCity> capitalCities = new ArrayList<CapitalCity>();
+            while (rset.next()) {
+                CapitalCity capitalCity = new CapitalCity();
+                capitalCity.Name = rset.getString("Name");
+                capitalCity.CountryCode = rset.getString("CountryCode");
+                capitalCity.Population = rset.getInt("Population");
+                capitalCities.add(capitalCity);
+            }
+            return capitalCities;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get cities");
+            return null;
+        }
+    }
+
+    /**
+     * Prints a top list of N cities in a district sorted by population
+     * taking in
+     * @param n number of cities
+     * @param district the name of the desired district
+     */
+    public ArrayList<CapitalCity> nPopulatedCapitalCities(int n, String district) {
+        try {
+            //Check if n is 0
+            if (n == 0)
+            {
+                System.out.println("n is empty");
+                return null;
+            }
+
+            //Check if district is null
+            if (district == null)
+            {
+                System.out.println("district is null");
+                return null;
+            }
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT Name, CountryCode, District, Population "
+                            + " FROM city "
+                            + " WHERE District='"+district+"' "
+                            + " ORDER BY Population DESC"
+                            + " LIMIT "+n+"";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract city information
+            ArrayList<CapitalCity> capitalCities = new ArrayList<CapitalCity>();
+            while (rset.next()) {
+                CapitalCity capitalCity = new CapitalCity();
+                capitalCity.Name = rset.getString("Name");
+                capitalCity.CountryCode = rset.getString("CountryCode");
+                capitalCity.Population = rset.getInt("Population");
+                capitalCities.add(capitalCity);
+            }
+            return capitalCities;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get cities");
+            return null;
+        }
+    }
+
+    /**
+     * Prints a top list of N cities in a district sorted by population
+     * taking in
+     * @param n number of cities
+     * @param district the name of the desired district
+     */
+    public ArrayList<CapitalCity> nPopulatedCapitalCitiesIn(int n, String district) {
+        try {
+            //Check if n is 0
+            if (n == 0)
+            {
+                System.out.println("n is empty");
+                return null;
+            }
+
+            //Check if district is null
+            if (district == null)
+            {
+                System.out.println("district is null");
+                return null;
+            }
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT Name, CountryCode, District, Population "
+                            + " FROM city "
+                            + " WHERE District='"+district+"' "
+                            + " ORDER BY Population DESC"
+                            + " LIMIT "+n+"";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract city information
+            ArrayList<CapitalCity> capitalCities = new ArrayList<CapitalCity>();
+            while (rset.next()) {
+                CapitalCity capitalCity = new CapitalCity();
+                capitalCity.Name = rset.getString("Name");
+                capitalCity.CountryCode = rset.getString("CountryCode");
+                capitalCity.Population = rset.getInt("Population");
+                capitalCities.add(capitalCity);
+            }
+            return capitalCities;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get cities");
+            return null;
+        }
+    }
 }
