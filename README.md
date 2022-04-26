@@ -26,12 +26,12 @@ Welcome to our README file
 | ID    | Name | Met  | Screenshot |
 |-------|------|------|------------|
 | 1     | All the countries in the world organised by largest population to smallest. | Yes | ![Code1-1](https://github.com/40440665/SEM_CW/blob/feature/language-reports/screenshots/1-1.png) __...__ ![Code1-2](https://github.com/40440665/SEM_CW/blob/feature/language-reports/screenshots/1-2.png) |
-| 2     | All the countries in a continent organised by largest population to smallest. | Yes |  |
-| 3     | All the countries in a region organised by largest population to smallest. | Yes |  |
-| 4     | The top N populated countries in the world where N is provided by the user. | Yes |  |
-| 5     | The top N populated countries in a continent where N is provided by the user. | Yes |   |
-| 6     | The top N populated countries in a region where N is provided by the user. | Yes |  |
-| 7     | All the cities in the world organised by largest population to smallest. | Yes |  |
+| 2     | All the countries in a continent organised by largest population to smallest. | Yes |![Code2-1](https://github.com/40440665/SEM_CW/blob/feature/language-reports/screenshots/2-1.png) __...__ ![Code2-2](https://github.com/40440665/SEM_CW/blob/feature/language-reports/screenshots/2-2.png)|
+| 3     | All the countries in a region organised by largest population to smallest. | Yes |![Code3](https://github.com/40440665/SEM_CW/blob/feature/language-reports/screenshots/3.png)|
+| 4     | The top N populated countries in the world where N is provided by the user. | Yes |![Code4](https://github.com/40440665/SEM_CW/blob/feature/language-reports/screenshots/4.png)|
+| 5     | The top N populated countries in a continent where N is provided by the user. | Yes |![Code5](https://github.com/40440665/SEM_CW/blob/feature/language-reports/screenshots/5.png)|
+| 6     | The top N populated countries in a region where N is provided by the user. | Yes |![Code6](https://github.com/40440665/SEM_CW/blob/feature/language-reports/screenshots/6.png)|
+| 7     | All the cities in the world organised by largest population to smallest. | Yes |![Code7-1](https://github.com/40440665/SEM_CW/blob/feature/language-reports/screenshots/7-1.png) __...__ ![Code7-2](https://github.com/40440665/SEM_CW/blob/feature/language-reports/screenshots/7-2.png)|
 | 8     | All the cities in the a continent organised by largest population to smallest. | Yes |![Code8-1](https://github.com/40440665/SEM_CW/blob/feature/language-reports/screenshots/8-1.png) __...__ ![Code8-2](https://github.com/40440665/SEM_CW/blob/feature/language-reports/screenshots/8-2.png)|
 | 9     | All the cities in the a region organised by largest population to smallest. | Yes |![Code9-1](https://github.com/40440665/SEM_CW/blob/feature/language-reports/screenshots/9-1.png) __...__ ![Code9-2](https://github.com/40440665/SEM_CW/blob/feature/language-reports/screenshots/9-2.png)|
 | 10    | All the cities in the a country organised by largest population to smallest. | Yes |![Code10-1](https://github.com/40440665/SEM_CW/blob/feature/language-reports/screenshots/10-1.png) __...__ ![Code10-2](https://github.com/40440665/SEM_CW/blob/feature/language-reports/screenshots/10-2.png)|
