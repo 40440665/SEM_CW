@@ -23,37 +23,6 @@ public class App {
             Test.connect(args[0], Integer.parseInt(args[1]));
         }
 
-        /// CITY METHODS
-
-        //Displays cities ordered by population
-        //ArrayList<City> cities = Test.citiesByPopulation();
-
-        //Displays cities in a continent
-        //ArrayList<City> cities = Test.citiesByContinent("Europe");
-
-        //Display cities by district
-        //ArrayList<City> cities = Test.citiesByDistrict("Balkh");
-
-        //Display cities in a region
-        //ArrayList<City> cities = Test.citiesByRegion("Caribbean");
-
-        //Display cities in a country
-        //ArrayList<City> cities = Test.citiesByCountry("France");
-
-        //Display top N populated cities in the world
-        //ArrayList<City> cities = Test.nPopulatedCities(4);
-
-        //Display top N populated cities in a continent
-        //ArrayList<City> cities = Test.nPopulatedCitiesInAContinent(3,"Europe");
-
-        //Display top N populated cities in a region
-        //ArrayList<City> cities = Test.nPopulatedCitiesInARegion(4, "Caribbean");
-
-        //Display top N populated cities in a district
-        //ArrayList<City> cities = Test.nPopulatedCitiesInADistrict(6, "California");
-
-        //Display top N populated cities in a country
-        //ArrayList<City> cities = Test.nPopulatedCitiesInACountry(3, "France");
 
 
         // COUNTRY METHODS
@@ -62,7 +31,7 @@ public class App {
         //ArrayList<Country> countries = Test.countriesByPopulation();
 
         //Displays countries in a continent
-        ArrayList<Country> countries = Test.countriesByContinent("Europe");
+        //ArrayList<Country> countries = Test.countriesByContinent("Europe");
 
         //Display countries in a region
         //ArrayList<Country> countries = Test.countriesByRegion("Caribbean");
@@ -76,13 +45,94 @@ public class App {
         //Display top N populated countries in a region
         //ArrayList<Country> countries = Test.nPopulatedCountriesInARegion(4, "Caribbean");
 
+
+
+        /// CITY METHODS
+
+        //Displays cities ordered by population
+        //ArrayList<City> cities = Test.citiesByPopulation();
+
+        //Displays cities in a continent
+        //ArrayList<City> cities = Test.citiesByContinent("Europe");
+
+        //Display cities in a region
+        //ArrayList<City> cities = Test.citiesByRegion("Caribbean");
+
+        //Display cities in a country
+        //ArrayList<City> cities = Test.citiesByCountry("France");
+
+        //Display cities by district
+        //ArrayList<City> cities = Test.citiesByDistrict("Balkh");
+
+        //Display top N populated cities in the world
+        //ArrayList<City> cities = Test.nPopulatedCities(4);
+
+        //Display top N populated cities in a continent
+        //ArrayList<City> cities = Test.nPopulatedCitiesInAContinent(3,"Europe");
+
+        //Display top N populated cities in a region
+        //ArrayList<City> cities = Test.nPopulatedCitiesInARegion(4, "Caribbean");
+
+        //Display top N populated cities in a country
+        //ArrayList<City> cities = Test.nPopulatedCitiesInACountry(3, "France");
+
+        //Display top N populated cities in a district
+        //ArrayList<City> cities = Test.nPopulatedCitiesInADistrict(6, "California");
+
+
+
+        // CAPITAL CITY METHODS
+
+
+
+
+
+
+
+        // POPULATION METHODS
+
+        //Display the world population
+        //String worldPop = Test.worldPopulation();
+        //System.out.println(worldPop);
+
+        //Display the population statistics of a continent
+        //Population populationReport = Test.continentPopulation("Europe");
+
+        //Display the population statistics of a region
+        //Population populationReport = Test.regionPopulation("Caribbean");
+
+        //Display the population statistics of a country
+        //Population populationReport = Test.countryPopulation("France");
+
+        //Display the population statistics of a district
+        //String districtPop = Test.districtPopulation("California");
+        //System.out.println(districtPop);
+
+        //Display the population statistics of a city
+        //String cityPop = Test.cityPopulation("Paris");
+        //System.out.println(cityPop);
+
+
+
+        // LANGUAGE REPORT
+
+        //ArrayList<Language> languageReport = Test.languageReport();
+
+
+
         // INVOKE PRINT METHODS
+
+        //Print the countries
+        //Test.printCountries(countries);
 
         //Print the cities
         //Test.printCities(cities);
 
-        //Print the countries
-        Test.printCountries(countries);
+        //Print the population reports
+        //Test.printPopulation(populationReport);
+
+        //Print the language report
+        //Test.printLanguages(languageReport);
 
         //Disconnect from database
         Test.disconnect();
@@ -142,6 +192,38 @@ public class App {
     }
 
 
+    /**
+     * Prints a list of cities
+     *
+     * @param countries The list of cities to print
+     */
+    public void printCountries(ArrayList<Country> countries) {
+
+        // Check countries is not null
+        if (countries == null)
+        {
+            System.out.println("No countries");
+            return;
+        }
+
+        // Print header
+        System.out.println(String.format("%-5s %-45s %-15s %-30s %-15s %-8s", "Code", "Name", "Continent", "Region", "Population", "Capital"));
+
+        // Loop over all countries in the list
+        for (Country country : countries) {
+            if (country == null)
+            {
+                continue;
+            }
+
+            //Formatting the rows that will come under the header
+            String country_string =
+                    String.format("%-5s %-45s %-15s %-30s %-15s %-8s",
+                            country.Code, country.Name, country.Continent, country.Region, country.Population, country.Capital);
+            System.out.println(country_string);
+        }
+    }
+
 
     /**
      * Prints a list of cities
@@ -175,35 +257,320 @@ public class App {
         }
     }
 
+
+
     /**
-     * Prints a list of cities
+     * Prints a population report
      *
-     * @param countries The list of cities to print
+     * @param report The list
      */
-    public void printCountries(ArrayList<Country> countries) {
-
-        // Check countries is not null
-        if (countries == null)
-        {
-            System.out.println("No countries");
-            return;
-        }
-
+    public void printPopulation(Population report) {
         // Print header
-        System.out.println(String.format("%-5s %-45s %-15s %-30s %-15s %-8s", "Code", "Name", "Continent", "Region", "Population", "Capital"));
+        System.out.println(String.format("%-40s %-15s %-20s %-8s %-8s %-8s", "Name", "Population", "Population Living in Cities", "Percentage of Population Living in Cities", "Population not Living in Cities", "Percentage of Population not Living in Cities"));
 
-        // Loop over all countries in the list
-        for (Country country : countries) {
-            if (country == null)
+        //Formatting the rows that will come under the header
+        String population_string =
+                String.format("%-10s %-15s %-10s %-10s %-10s %-10s",
+                        report.Name, report.Population, report.PopulationInCities, report.PercentInCities, report.PopulationNotInCities, report.PercentNotInCities);
+        System.out.println(population_string);
+    }
+
+    /**
+     * Prints a languages report
+     *
+     * @param languageReports The list
+     */
+    public void printLanguages(ArrayList<Language> languageReports) {
+        // Print header
+        System.out.println(String.format("%-10s %-10s %-10s", "Language", "Speakers", "Percentage of World Population"));
+
+        // Loop over all cities in the list
+        for (Language languageReport : languageReports) {
+            if (languageReport == null)
             {
                 continue;
             }
 
             //Formatting the rows that will come under the header
-            String country_string =
-                    String.format("%-5s %-45s %-15s %-30s %-15s %-8s",
-                            country.Code, country.Name, country.Continent, country.Region, country.Population, country.Capital);
-            System.out.println(country_string);
+            String languages_string =
+                    String.format("%-10s %-10s %-10s",
+                            languageReport.Language, languageReport.Speakers, languageReport.PercentageOfWorldPopulation);
+            System.out.println(languages_string);
+        }
+    }
+
+
+    /**
+     * Sorts all countries in the world by population
+     */
+    public ArrayList<Country> countriesByPopulation() {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT Code, Name, Continent, Region, Population, Capital "
+                            + " FROM country "
+                            + " ORDER BY Population DESC";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract country information
+            ArrayList<Country> countries = new ArrayList<Country>();
+            while (rset.next()) {
+                Country country = new Country();
+                country.Code = rset.getString("Code");
+                country.Name = rset.getString("Name");
+                country.Continent = rset.getString("Continent");
+                country.Region = rset.getString("Region");
+                country.Population = rset.getInt("Population");
+                country.Capital = rset.getString("Capital");
+                countries.add(country);
+            }
+            return countries;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get countries");
+            return null;
+        }
+    }
+
+    /**
+     * Prints a list of countries in a continent sorted by population
+     * taking in
+     * @param continent which is the name of the desired continent
+     */
+    public ArrayList<Country> countriesByContinent(String continent) {
+        try {
+            //Check if continent is null
+            if (continent == null)
+            {
+                System.out.println("continent is null");
+                return null;
+            }
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT Code, Name, Continent, Region, Population, Capital "
+                            + " FROM country "
+                            + " WHERE Continent = '" + continent + "' "
+                            + " ORDER BY Population DESC";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract country information
+            ArrayList<Country> countries = new ArrayList<Country>();
+            while (rset.next()) {
+                Country country = new Country();
+                country.Code = rset.getString("Code");
+                country.Name = rset.getString("Name");
+                country.Continent = rset.getString("Continent");
+                country.Region = rset.getString("Region");
+                country.Population = rset.getInt("Population");
+                country.Capital = rset.getString("Capital");
+                countries.add(country);
+            }
+            return countries;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get countries");
+            return null;
+        }
+    }
+
+    /**
+     * Prints a list of countries in a region sorted by population
+     * taking in
+     * @param region which is the name of the desired region
+     */
+    public ArrayList<Country> countriesByRegion(String region) {
+        try {
+            //Check if region is null
+            if (region == null)
+            {
+                System.out.println("region is null");
+                return null;
+            }
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT Code, Name, Continent, Region, Population, Capital "
+                            + " FROM country "
+                            + " WHERE Region = '" + region + "' "
+                            + " ORDER BY Population DESC";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract country information
+            ArrayList<Country> countries = new ArrayList<Country>();
+            while (rset.next()) {
+                Country country = new Country();
+                country.Code = rset.getString("Code");
+                country.Name = rset.getString("Name");
+                country.Continent = rset.getString("Continent");
+                country.Region = rset.getString("Region");
+                country.Population = rset.getInt("Population");
+                country.Capital = rset.getString("Capital");
+                countries.add(country);
+            }
+            return countries;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get countries");
+            return null;
+        }
+    }
+
+
+    /**
+     * Prints a top list of N countries in the world based on the input from the user.
+     * taking in
+     * @param n number of countries that we want to display
+     */
+    public ArrayList<Country> nPopulatedCountries(int n) {
+        try {
+            //Check if n is 0
+            if (n == 0)
+            {
+                System.out.println("n is 0");
+                return null;
+            }
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT Code, Name, Continent, Region, Population, Capital "
+                            + " FROM country "
+                            + " ORDER BY Population DESC "
+                            + " LIMIT "+n+"";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract country information
+            ArrayList<Country> countries = new ArrayList<Country>();
+            while (rset.next()) {
+                Country country = new Country();
+                country.Code = rset.getString("Code");
+                country.Name = rset.getString("Name");
+                country.Continent = rset.getString("Continent");
+                country.Region = rset.getString("Region");
+                country.Population = rset.getInt("Population");
+                country.Capital = rset.getString("Capital");
+                countries.add(country);
+            }
+            return countries;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get countries");
+            return null;
+        }
+    }
+
+    /**
+     * Prints a top list of N countries in a continent sorted by population
+     * taking in
+     * @param n number of countries
+     * @param continent the name of the desired continent
+     */
+    public ArrayList<Country> nPopulatedCountriesInAContinent(int n, String continent) {
+        try {
+            //Check if n is 0
+            if (n == 0)
+            {
+                System.out.println("n is empty");
+                return null;
+            }
+
+            //Check if continent is null
+            if (continent == null)
+            {
+                System.out.println("Continent is null");
+                return null;
+            }
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT Code, Name, Continent, Region, Population, Capital "
+                            + " FROM country "
+                            + " WHERE Continent = '"+continent+"' "
+                            + " ORDER BY Population DESC "
+                            + " LIMIT "+n+" ";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract country information
+            ArrayList<Country> countries = new ArrayList<Country>();
+            while (rset.next()) {
+                Country country = new Country();
+                country.Code = rset.getString("Code");
+                country.Name = rset.getString("Name");
+                country.Continent = rset.getString("Continent");
+                country.Region = rset.getString("Region");
+                country.Population = rset.getInt("Population");
+                country.Capital = rset.getString("Capital");
+                countries.add(country);
+            }
+            return countries;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get Country details");
+            return null;
+        }
+    }
+
+    /**
+     * Prints a top list of N countries in a region sorted by population
+     * taking in
+     * @param n number of countries
+     * @param region the name of the desired region
+     */
+    public ArrayList<Country> nPopulatedCountriesInARegion(int n, String region) {
+        try {
+            //Check if n is 0
+            if (n == 0)
+            {
+                System.out.println("n is empty");
+                return null;
+            }
+
+            //Check if region is null
+            if (region == null)
+            {
+                System.out.println("Region is null");
+                return null;
+            }
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT Code, Name, Continent, Region, Population, Capital "
+                            + " FROM country "
+                            + " WHERE Region = '"+region+"' "
+                            + " ORDER BY Population DESC "
+                            + " LIMIT "+n+" ";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract country information
+            ArrayList<Country> countries = new ArrayList<Country>();
+            while (rset.next()) {
+                Country country = new Country();
+                country.Code = rset.getString("Code");
+                country.Name = rset.getString("Name");
+                country.Continent = rset.getString("Continent");
+                country.Region = rset.getString("Region");
+                country.Population = rset.getInt("Population");
+                country.Capital = rset.getString("Capital");
+                countries.add(country);
+            }
+            return countries;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get Country details");
+            return null;
         }
     }
 
@@ -241,49 +608,6 @@ public class App {
         }
     }
 
-
-    /**
-     * Prints a list of cities in a district sorted by population
-     * taking in
-     * @param district which is the name of the desired district
-     */
-    public ArrayList<City> citiesByDistrict(String district) {
-        try {
-
-            //Check if district is null
-            if (district == null)
-            {
-                System.out.println("district is null");
-                return null;
-            }
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement
-            String strSelect =
-                    "SELECT Name, CountryCode, District, Population "
-                            + " FROM city "
-                            + " WHERE District='"+district+"' "
-                            + " ORDER BY Population DESC";
-
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-            // Extract city information
-            ArrayList<City> cities = new ArrayList<City>();
-            while (rset.next()) {
-                City city = new City();
-                city.Name = rset.getString("Name");
-                city.CountryCode = rset.getString("CountryCode");
-                city.District = rset.getString("District");
-                city.Population = rset.getInt("Population");
-                cities.add(city);
-            }
-            return cities;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get cities");
-            return null;
-        }
-    }
 
     /**
      * Prints a list of cities in a continent sorted by population
@@ -413,6 +737,51 @@ public class App {
             return null;
         }
     }
+
+
+    /**
+     * Prints a list of cities in a district sorted by population
+     * taking in
+     * @param district which is the name of the desired district
+     */
+    public ArrayList<City> citiesByDistrict(String district) {
+        try {
+
+            //Check if district is null
+            if (district == null)
+            {
+                System.out.println("district is null");
+                return null;
+            }
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT Name, CountryCode, District, Population "
+                            + " FROM city "
+                            + " WHERE District='"+district+"' "
+                            + " ORDER BY Population DESC";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract city information
+            ArrayList<City> cities = new ArrayList<City>();
+            while (rset.next()) {
+                City city = new City();
+                city.Name = rset.getString("Name");
+                city.CountryCode = rset.getString("CountryCode");
+                city.District = rset.getString("District");
+                city.Population = rset.getInt("Population");
+                cities.add(city);
+            }
+            return cities;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get cities");
+            return null;
+        }
+    }
+
 
    /**
      * Prints a top list of N cities in the world based on the input from the user.
@@ -664,281 +1033,6 @@ public class App {
             return null;
         }
     }
-
-    /**
-     * Sorts all countries in the world by population
-    */
-    public ArrayList<Country> countriesByPopulation() {
-        try {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement
-            String strSelect =
-                    "SELECT Code, Name, Continent, Region, Population, Capital "
-                            + " FROM country "
-                            + " ORDER BY Population DESC";
-
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-            // Extract country information
-            ArrayList<Country> countries = new ArrayList<Country>();
-            while (rset.next()) {
-                Country country = new Country();
-                country.Code = rset.getString("Code");
-                country.Name = rset.getString("Name");
-                country.Continent = rset.getString("Continent");
-                country.Region = rset.getString("Region");
-                country.Population = rset.getInt("Population");
-                country.Capital = rset.getString("Capital");
-                countries.add(country);
-            }
-            return countries;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get countries");
-            return null;
-        }
-    }
-
-    /**
-     * Prints a list of countries in a continent sorted by population
-     * taking in
-     * @param continent which is the name of the desired continent
-     */
-    public ArrayList<Country> countriesByContinent(String continent) {
-        try {
-            //Check if continent is null
-            if (continent == null)
-            {
-                System.out.println("continent is null");
-                return null;
-            }
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement
-            String strSelect =
-                    "SELECT Code, Name, Continent, Region, Population, Capital "
-                            + " FROM country "
-                            + " WHERE Continent = '" + continent + "' "
-                            + " ORDER BY Population DESC";
-
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-            // Extract country information
-            ArrayList<Country> countries = new ArrayList<Country>();
-            while (rset.next()) {
-                Country country = new Country();
-                country.Code = rset.getString("Code");
-                country.Name = rset.getString("Name");
-                country.Continent = rset.getString("Continent");
-                country.Region = rset.getString("Region");
-                country.Population = rset.getInt("Population");
-                country.Capital = rset.getString("Capital");
-                countries.add(country);
-            }
-            return countries;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get countries");
-            return null;
-        }
-    }
-
-    /**
-     * Prints a list of countries in a region sorted by population
-     * taking in
-     * @param region which is the name of the desired region
-     */
-    public ArrayList<Country> countriesByRegion(String region) {
-        try {
-            //Check if region is null
-            if (region == null)
-            {
-                System.out.println("region is null");
-                return null;
-            }
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement
-            String strSelect =
-                    "SELECT Code, Name, Continent, Region, Population, Capital "
-                            + " FROM country "
-                            + " WHERE Region = '" + region + "' "
-                            + " ORDER BY Population DESC";
-
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-            // Extract country information
-            ArrayList<Country> countries = new ArrayList<Country>();
-            while (rset.next()) {
-                Country country = new Country();
-                country.Code = rset.getString("Code");
-                country.Name = rset.getString("Name");
-                country.Continent = rset.getString("Continent");
-                country.Region = rset.getString("Region");
-                country.Population = rset.getInt("Population");
-                country.Capital = rset.getString("Capital");
-                countries.add(country);
-            }
-            return countries;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get countries");
-            return null;
-        }
-    }
-
-
-       /**
-     * Prints a top list of N countries in the world based on the input from the user.
-     * taking in
-     * @param n number of countries that we want to display
-     */
-    public ArrayList<Country> nPopulatedCountries(int n) {
-        try {
-            //Check if n is 0
-            if (n == 0)
-            {
-                System.out.println("n is 0");
-                return null;
-            }
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement
-            String strSelect =
-                    "SELECT Code, Name, Continent, Region, Population, Capital "
-                            + " FROM country "
-                            + " ORDER BY Population DESC "
-                            + " LIMIT "+n+"";
-
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-            // Extract country information
-            ArrayList<Country> countries = new ArrayList<Country>();
-            while (rset.next()) {
-                Country country = new Country();
-                country.Code = rset.getString("Code");
-                country.Name = rset.getString("Name");
-                country.Continent = rset.getString("Continent");
-                country.Region = rset.getString("Region");
-                country.Population = rset.getInt("Population");
-                country.Capital = rset.getString("Capital");
-                countries.add(country);
-            }
-            return countries;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get countries");
-            return null;
-        }
-    }
-
-    /**
-     * Prints a top list of N countries in a continent sorted by population
-     * taking in
-     * @param n number of countries
-     * @param continent the name of the desired continent
-     */
-    public ArrayList<Country> nPopulatedCountriesInAContinent(int n, String continent) {
-        try {
-            //Check if n is 0
-            if (n == 0)
-            {
-                System.out.println("n is empty");
-                return null;
-            }
-
-            //Check if continent is null
-            if (continent == null)
-            {
-                System.out.println("Continent is null");
-                return null;
-            }
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement
-            String strSelect =
-                    "SELECT Code, Name, Continent, Region, Population, Capital "
-                            + " FROM country "
-                            + " WHERE Continent = '"+continent+"' "
-                            + " ORDER BY Population DESC "
-                            + " LIMIT "+n+" ";
-
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-            // Extract country information
-            ArrayList<Country> countries = new ArrayList<Country>();
-            while (rset.next()) {
-                Country country = new Country();
-                country.Code = rset.getString("Code");
-                country.Name = rset.getString("Name");
-                country.Continent = rset.getString("Continent");
-                country.Region = rset.getString("Region");
-                country.Population = rset.getInt("Population");
-                country.Capital = rset.getString("Capital");
-                countries.add(country);
-            }
-            return countries;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get Country details");
-            return null;
-        }
-    }
-
-    /**
-     * Prints a top list of N countries in a region sorted by population
-     * taking in
-     * @param n number of countries
-     * @param region the name of the desired region
-     */
-    public ArrayList<Country> nPopulatedCountriesInARegion(int n, String region) {
-        try {
-            //Check if n is 0
-            if (n == 0)
-            {
-                System.out.println("n is empty");
-                return null;
-            }
-
-            //Check if region is null
-            if (region == null)
-            {
-                System.out.println("Region is null");
-                return null;
-            }
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement
-            String strSelect =
-                    "SELECT Code, Name, Continent, Region, Population, Capital "
-                            + " FROM country "
-                            + " WHERE Region = '"+region+"' "
-                            + " ORDER BY Population DESC "
-                            + " LIMIT "+n+" ";
-
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-            // Extract country information
-            ArrayList<Country> countries = new ArrayList<Country>();
-            while (rset.next()) {
-                Country country = new Country();
-                country.Code = rset.getString("Code");
-                country.Name = rset.getString("Name");
-                country.Continent = rset.getString("Continent");
-                country.Region = rset.getString("Region");
-                country.Population = rset.getInt("Population");
-                country.Capital = rset.getString("Capital");
-                countries.add(country);
-            }
-            return countries;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get Country details");
-            return null;
-        }
-    }
-
 
     public String worldPopulation() {
         try {
