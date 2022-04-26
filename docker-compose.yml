@@ -11,5 +11,5 @@ services:
     restart: always
 
   # Open and make ports listen for faster connection to the database.
-    ports:
-      - "33060:3306"
+  #  ports:
+  #    - "33060:3306"
