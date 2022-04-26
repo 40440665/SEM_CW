@@ -72,10 +72,38 @@ public class App {
         //Display top N populated countries in a region
         //ArrayList<Country> countries = Test.nPopulatedCountriesInARegion(4, "Caribbean");
 
+        // CAPITAL CITY METHODS
 
 
 
 
+
+
+
+        // POPULATION METHODS
+
+        //Display the world population
+        //String worldPop = Test.worldPopulation();
+        //System.out.println(worldPop);
+
+        //Display the population statistics of a continent
+        //Population populationReport = Test.continentPopulation("Europe");
+
+        //Display the population statistics of a region
+        //Population populationReport = Test.regionPopulation("Caribbean");
+
+        //Display the population statistics of a country
+        Population populationReport = Test.countryPopulation("Spain");
+
+        //Display the population statistics of a district
+        //String districtPop = Test.districtPopulation("California");
+        //System.out.println(districtPop);
+
+        //Display the population statistics of a city
+        //String cityPop = Test.cityPopulation("Paris");
+        //System.out.println(cityPop);
+
+        // LANGUAGE REPORT
 
         //ArrayList<Language> languageReports = Test.languageReport();
 
@@ -86,6 +114,9 @@ public class App {
 
         //Print the countries
         //Test.printCountries(countries);
+
+        //Print the population reports
+        Test.printPopulation(populationReport);
 
         //Print the cities
         //Test.printCities(cities);
@@ -146,7 +177,7 @@ public class App {
         }
     }
 
-
+    //PRINT METHODS
 
     /**
      * Prints a list of cities
@@ -212,6 +243,22 @@ public class App {
         }
     }
 
+    /**
+     * Prints a population report
+     *
+     * @param report The list
+     */
+    public void printPopulation(Population report) {
+        // Print header
+        System.out.println(String.format("%-15s %-15s %-30s %-30s %-30s %-30s", "Name", "Population", "Population in Cities", "% of Population in Cities", "Population NOT in Cities", "% of Population NOT in Cities"));
+
+        //Formatting the rows that will come under the header
+        String population_string =
+                String.format("%-15s %-15s %-30s %-30s %-30s %-30s",
+                        report.Name, report.Population, report.PopulationInCities, report.PercentInCities, report.PopulationNotInCities, report.PercentNotInCities);
+        System.out.println(population_string);
+    }
+
         /**
      * Prints a languages report
      * @param languageReports The list
@@ -235,6 +282,7 @@ public class App {
         }
     }
 
+    //CITY METHODS
 
     /**
      * Sorts all cities in the world by population
@@ -693,6 +741,8 @@ public class App {
         }
     }
 
+    //COUNTRY METHODS
+
     /**
      * Sorts all countries in the world by population
      */
@@ -965,6 +1015,218 @@ public class App {
             return null;
         }
     }
+
+    //POPULATION METHODS
+
+    public String worldPopulation() {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT  SUM(Population) AS Population "
+                            + " FROM country ";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract population information
+            rset.next();
+            long worldPop = rset.getLong(1);
+
+            String worldPopString = "World population is " + worldPop;
+            return worldPopString;
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city details");
+            return null;
+        }
+    }
+
+    public Population continentPopulation(String continent) {
+        try {
+            //Check if continent is null
+            if (continent == null) {
+                System.out.println("Continent is null");
+                return null;
+            }
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT Continent AS Name, SUM(Population) AS Population, "
+                            + " (SELECT SUM(city.Population) FROM city, country WHERE city.CountryCode = country.Code AND country.Continent = '" + continent + "') AS 'Population Living in Cities', "
+                            + " ROUND(((SELECT SUM(city.Population) FROM city, country WHERE city.CountryCode = country.Code AND country.Continent = '" + continent + "') / (SUM(country.Population)))*100,1) AS 'Percentage of Population Living in Cities', "
+                            + " (SUM(country.Population) - (SELECT SUM(city.Population) FROM city, country WHERE city.CountryCode = country.Code AND country.Continent = '" + continent + "')) AS 'Population not Living in cities', "
+                            + " ROUND((((SUM(country.Population)) - (SELECT SUM(city.Population) FROM city, country WHERE city.CountryCode = country.Code AND country.Continent = '" + continent + "')) / SUM(country.Population))*100, 1) AS 'Percentage of Population not Living in Cities' "
+                            + "FROM country WHERE Continent = '" + continent + "' ";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract population information
+            Population report = new Population();
+            rset.next();
+            report.Name = rset.getString("Name");
+            report.Population = rset.getInt("Population");
+            report.PopulationInCities = rset.getInt("Population Living in Cities");
+            report.PercentInCities = rset.getDouble("Percentage of Population Living in Cities");
+            report.PopulationNotInCities = rset.getInt("Population not Living in Cities");
+            report.PercentNotInCities = rset.getDouble("Percentage of Population not Living in Cities");
+
+            return report;
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get continent details");
+            return null;
+        }
+    }
+
+    public Population regionPopulation(String region) {
+        try {
+            //Check if region is null
+            if (region == null)
+            {
+                System.out.println("Region is null");
+                return null;
+            }
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT country.Region AS Name, SUM(country.Population) AS Population, "
+                            + " (SELECT SUM(city.Population) FROM city, country WHERE city.CountryCode = country.Code AND country.Region = '" + region + "') AS 'Population Living in Cities', "
+                            + " ROUND(((SELECT SUM(city.Population) FROM city, country WHERE city.CountryCode = country.Code AND country.Region = '" + region + "') / (SUM(country.Population)))*100,1) AS 'Percentage of Population Living in Cities', "
+                            + " (SUM(country.Population) - (SELECT SUM(city.Population) FROM city, country WHERE city.CountryCode = country.Code AND Region = '" + region + "')) AS 'Population not Living in cities', "
+                            + " ROUND((((SUM(country.Population)) - (SELECT SUM(city.Population) FROM city, country WHERE city.CountryCode = country.Code AND country.Region = '" + region + "')) / SUM(country.Population))*100, 1) AS 'Percentage of Population not Living in Cities' "
+                            + " FROM country WHERE Region = '" + region + "' ";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract population information
+            Population report = new Population();
+            rset.next();
+            report.Name = rset.getString("Name");
+            report.Population = rset.getInt("Population");
+            report.PopulationInCities = rset.getInt("Population Living in Cities");
+            report.PercentInCities = rset.getDouble("Percentage of Population Living in Cities");
+            report.PopulationNotInCities = rset.getInt("Population not Living in Cities");
+            report.PercentNotInCities = rset.getDouble("Percentage of Population not Living in Cities");
+
+            return report;
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get region details");
+            return null;
+        }
+    }
+
+    public Population countryPopulation(String country) {
+        try {
+            //Check if country is null
+            if (country == null)
+            {
+                System.out.println("Country is null");
+                return null;
+            }
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    " SELECT Name, Population, "
+                            + " (SELECT SUM(city.Population) FROM city WHERE countryCode = '" + country + "') AS 'Population Living in Cities', "
+                            + " ROUND(((SELECT SUM(city.Population) FROM city WHERE CountryCode = '" + country + "') / Population)*100,1) AS 'Percentage of Population Living in Cities', "
+                            + " (Population - (SELECT SUM(population) FROM city WHERE countryCode = '" + country + "')) AS 'Population not Living in Cities', "
+                            + " ROUND(((Population - (SELECT SUM(city.Population) FROM city WHERE countryCode = '" + country + "')) / Population)*100, 1) AS 'Percentage of Population not Living in Cities' "
+                            + " FROM country WHERE Code = '" + country + "' ";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract population information
+            Population report = new Population();
+            rset.next();
+            report.Name = rset.getString("Name");
+            report.Population = rset.getInt("Population");
+            report.PopulationInCities = rset.getInt("Population Living in Cities");
+            report.PercentInCities = rset.getDouble("Percentage of Population Living in Cities");
+            report.PopulationNotInCities = rset.getInt("Population not Living in Cities");
+            report.PercentNotInCities = rset.getDouble("Percentage of Population not Living in Cities");
+
+            return report;
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get country details");
+            return null;
+        }
+    }
+
+    public String districtPopulation(String district) {
+        try {
+            //Check if district is null
+            if (district == null)
+            {
+                System.out.println("District is null");
+                return null;
+            }
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT  SUM(population) AS Population "
+                            + " FROM city "
+                            + " WHERE District = '" + district + "' ";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract population information
+            rset.next();
+            long districtPop = rset.getLong(1);
+
+            String districtPopString = district + "'s population is " + districtPop;
+            return districtPopString;
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city details");
+            return null;
+        }
+    }
+
+    public String cityPopulation(String city) {
+        try {
+            //Check if city is null
+            if (city == null)
+            {
+                System.out.println("City is null");
+                return null;
+            }
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT  SUM(population) AS population "
+                            + "FROM city "
+                            + " WHERE Name = '" + city + "' ";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract population information
+            rset.next();
+            long cityPop = rset.getLong(1);
+
+            String cityPopString = city + "'s population is " + cityPop;
+            return cityPopString;
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city details");
+            return null;
+        }
+    }
+
+    //LANGUAGE METHODS
 
     public ArrayList<Language> languageReport() {
         try {
