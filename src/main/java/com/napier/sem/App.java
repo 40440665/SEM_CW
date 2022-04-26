@@ -169,10 +169,10 @@ public class App {
                 report.Name, report.Population, report.PopulationInCities, report.PercentInCities, report.PopulationNotInCities, report.PercentNotInCities);
         System.out.println(population_string);
     }
-        /**
+    /**
      * Prints a languages report
      *
-     * @param report The list
+     * @param languageReports The list
      */
     public void printLanguages(ArrayList<Language> languageReports) {
         // Print header
