@@ -52,14 +52,14 @@ public class App {
 
         //Population report = Test.continentPopulation("Europe");
 
-        System.out.println(Test.worldPopulation());
+        //System.out.println(Test.worldPopulation());
         //Test.printPopulation(report);
 
         //ArrayList<City> cities = Test.nPopulatedCitiesInACountry(3, "France");
 
-        ArrayList<Language> languageReports = Test.languageReport();
+        //ArrayList<Language> languageReports = Test.languageReport();
 
-        Test.printLanguages(languageReports);
+        //Test.printLanguages(languageReports);
 
         //Print the cities
         //Test.printCities(cities);
@@ -169,6 +169,7 @@ public class App {
                 report.Name, report.Population, report.PopulationInCities, report.PercentInCities, report.PopulationNotInCities, report.PercentNotInCities);
         System.out.println(population_string);
     }
+
     /**
      * Prints a languages report
      *
@@ -229,49 +230,6 @@ public class App {
 
 
     /**
-     * Prints a list of cities in a district sorted by population
-     * taking in
-     * @param district which is the name of the desired district
-     */
-    public ArrayList<City> citiesByDistrict(String district) {
-        try {
-
-            //Check if district is null
-            if (district == null)
-            {
-                System.out.println("district is null");
-                return null;
-            }
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement
-            String strSelect =
-                    "SELECT Name, CountryCode, District, Population "
-                            + " FROM city "
-                            + " WHERE District='"+district+"' "
-                            + " ORDER BY Population DESC";
-
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-            // Extract city information
-            ArrayList<City> cities = new ArrayList<City>();
-            while (rset.next()) {
-                City city = new City();
-                city.Name = rset.getString("Name");
-                city.CountryCode = rset.getString("CountryCode");
-                city.District = rset.getString("District");
-                city.Population = rset.getInt("Population");
-                cities.add(city);
-            }
-            return cities;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get cities");
-            return null;
-        }
-    }
-
-    /**
      * Prints a list of cities in a continent sorted by population
      * taking in
      * @param continent which is the name of the desired continent
@@ -314,47 +272,6 @@ public class App {
         }
     }
 
-    /**
-     * Prints a top list of N cities in the world based on the input from the user.
-     * taking in
-     * @param n number of cities that we want to display
-     */
-    public ArrayList<City> nPopulatedCities(int n) {
-        try {
-            //Check if n is 0
-            if (n == 0)
-            {
-                System.out.println("n is 0");
-                return null;
-            }
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement
-            String strSelect =
-                    "SELECT Name, CountryCode, District, Population "
-                            + " FROM city "
-                            + " ORDER BY Population DESC "
-                            + " LIMIT "+n+"";
-
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-            // Extract city information
-            ArrayList<City> cities = new ArrayList<City>();
-            while (rset.next()) {
-                City city = new City();
-                city.Name = rset.getString("Name");
-                city.CountryCode = rset.getString("CountryCode");
-                city.District = rset.getString("District");
-                city.Population = rset.getInt("Population");
-                cities.add(city);
-            }
-            return cities;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get cities");
-            return null;
-        }
-    }
 
     /**
      * Prints a list of cities in a region sorted by order
@@ -399,6 +316,7 @@ public class App {
         }
     }
 
+
     /**
      * Prints a list of cities in a country sorted by population
      * taking in
@@ -441,6 +359,94 @@ public class App {
             return null;
         }
     }
+
+
+    /**
+     * Prints a list of cities in a district sorted by population
+     * taking in
+     * @param district which is the name of the desired district
+     */
+    public ArrayList<City> citiesByDistrict(String district) {
+        try {
+
+            //Check if district is null
+            if (district == null)
+            {
+                System.out.println("district is null");
+                return null;
+            }
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT Name, CountryCode, District, Population "
+                            + " FROM city "
+                            + " WHERE District='"+district+"' "
+                            + " ORDER BY Population DESC";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract city information
+            ArrayList<City> cities = new ArrayList<City>();
+            while (rset.next()) {
+                City city = new City();
+                city.Name = rset.getString("Name");
+                city.CountryCode = rset.getString("CountryCode");
+                city.District = rset.getString("District");
+                city.Population = rset.getInt("Population");
+                cities.add(city);
+            }
+            return cities;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get cities");
+            return null;
+        }
+    }
+
+
+    /**
+     * Prints a top list of N cities in the world based on the input from the user.
+     * taking in
+     * @param n number of cities that we want to display
+     */
+    public ArrayList<City> nPopulatedCities(int n) {
+        try {
+            //Check if n is 0
+            if (n == 0)
+            {
+                System.out.println("n is 0");
+                return null;
+            }
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT Name, CountryCode, District, Population "
+                            + " FROM city "
+                            + " ORDER BY Population DESC "
+                            + " LIMIT "+n+"";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract city information
+            ArrayList<City> cities = new ArrayList<City>();
+            while (rset.next()) {
+                City city = new City();
+                city.Name = rset.getString("Name");
+                city.CountryCode = rset.getString("CountryCode");
+                city.District = rset.getString("District");
+                city.Population = rset.getInt("Population");
+                cities.add(city);
+            }
+            return cities;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get cities");
+            return null;
+        }
+    }
+
 
     /**
      * Prints a top list of N cities in a continent sorted by population
@@ -677,6 +683,7 @@ public class App {
         }
     }
 
+
     public Population continentPopulation(String continent) {
         try {
             //Check if continent is null
@@ -716,6 +723,7 @@ public class App {
             return null;
         }
     }
+
 
     public Population regionPopulation(String region) {
         try {
