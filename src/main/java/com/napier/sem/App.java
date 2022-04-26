@@ -50,7 +50,7 @@ public class App {
         //Display top N populated cities in a country
         //ArrayList<City> cities = Test.nPopulatedCitiesInACountry(3, "France");
 
-        ArrayList<CapitalCity> capitalCities = Test.capitalCitiesByRegion("Caribbean");
+        ArrayList<CapitalCity> capitalCities = Test.nPopulatedCapitalCities(4);
 
         //Print the cities
         //Test.printCities(cities);
@@ -758,12 +758,11 @@ public class App {
     }
 
     /**
-     * Prints a top list of N cities in a district sorted by population
+     * Prints a top list of N capital cities in a district sorted by population
      * taking in
-     * @param n number of cities
-     * @param district the name of the desired district
+     * @param n number of capital cities
      */
-    public ArrayList<CapitalCity> nPopulatedCapitalCities(int n, String district) {
+    public ArrayList<CapitalCity> nPopulatedCapitalCities(int n) {
         try {
             //Check if n is 0
             if (n == 0)
@@ -772,20 +771,15 @@ public class App {
                 return null;
             }
 
-            //Check if district is null
-            if (district == null)
-            {
-                System.out.println("district is null");
-                return null;
-            }
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT Name, CountryCode, District, Population "
-                            + " FROM city "
-                            + " WHERE District='"+district+"' "
-                            + " ORDER BY Population DESC"
+                    "SELECT city.Name AS Name, country.Name AS Country, city.Population "
+                        + " FROM city, country "
+                        + " WHERE city.CountryCode = country.code "
+                        + " AND city.ID IN (SELECT capital FROM country) "
+                        + " ORDER BY Population DESC "
                             + " LIMIT "+n+"";
 
             // Execute SQL statement
