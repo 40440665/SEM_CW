@@ -55,6 +55,11 @@ public class App {
         System.out.println(Test.worldPopulation());
         //Test.printPopulation(report);
 
+        //ArrayList<City> cities = Test.nPopulatedCitiesInACountry(3, "France");
+
+        ArrayList<Language> languageReports = Test.languageReport();
+
+        Test.printLanguages(languageReports);
 
         //Print the cities
         //Test.printCities(cities);
@@ -152,7 +157,7 @@ public class App {
     /**
      * Prints a population report
      *
-     * @param report The list 
+     * @param report The list
      */
     public void printPopulation(Population report) {
         // Print header
@@ -164,6 +169,30 @@ public class App {
                 report.Name, report.Population, report.PopulationInCities, report.PercentInCities, report.PopulationNotInCities, report.PercentNotInCities);
         System.out.println(population_string);
     }
+        /**
+     * Prints a languages report
+     *
+     * @param report The list
+     */
+    public void printLanguages(ArrayList<Language> languageReports) {
+        // Print header
+        System.out.println(String.format("%-10s %-10s %-10s", "Language", "Speakers", "Percentage of World Population"));
+
+        // Loop over all cities in the list
+        for (Language languageReport : languageReports) {
+            if (languageReport == null)
+            {
+                continue;
+            }
+
+            //Formatting the rows that will come under the header
+            String languages_string =
+                String.format("%-10s %-10s %-10s",
+                    languageReport.Language, languageReport.Speakers, languageReport.PercentageOfWorldPopulation);
+            System.out.println(languages_string);
+        }
+    }
+
 
     /**
      * Sorts all cities in the world by population
@@ -645,7 +674,7 @@ public class App {
             System.out.println(e.getMessage());
             System.out.println("Failed to get city details");
             return null;
-        }  
+        }
     }
 
     public Population continentPopulation(String continent) {
@@ -678,14 +707,14 @@ public class App {
             report.PercentInCities = rset.getDouble("Percentage of Population Living in Cities");
             report.PopulationNotInCities = rset.getInt("Population not Living in Cities");
             report.PercentNotInCities = rset.getDouble("Percentage of Population not Living in Cities");
-            
+
             return report;
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get continent details");
             return null;
-        }  
+        }
     }
 
     public Population regionPopulation(String region) {
@@ -706,7 +735,7 @@ public class App {
                         + " (SUM(country.Population) - (SELECT SUM(city.Population) FROM city, country WHERE city.CountryCode = country.Code AND Region = '" + region + "')) AS 'Population not Living in cities', "
                         + " ROUND((((SUM(country.Population)) - (SELECT SUM(city.Population) FROM city, country WHERE city.CountryCode = country.Code AND country.Region = '" + region + "')) / SUM(country.Population))*100, 1) AS 'Percentage of Population not Living in Cities' "
                         + " FROM country WHERE Region = '" + region + "' ";
-                    
+
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Extract population information
@@ -718,14 +747,14 @@ public class App {
             report.PercentInCities = rset.getDouble("Percentage of Population Living in Cities");
             report.PopulationNotInCities = rset.getInt("Population not Living in Cities");
             report.PercentNotInCities = rset.getDouble("Percentage of Population not Living in Cities");
-            
+
             return report;
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get region details");
             return null;
-        }  
+        }
     }
 
     public Population countryPopulation(String country) {
@@ -758,14 +787,14 @@ public class App {
             report.PercentInCities = rset.getDouble("Percentage of Population Living in Cities");
             report.PopulationNotInCities = rset.getInt("Population not Living in Cities");
             report.PercentNotInCities = rset.getDouble("Percentage of Population not Living in Cities");
-            
+
             return report;
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get country details");
             return null;
-        }  
+        }
     }
 
     public String districtPopulation(String district) {
@@ -789,7 +818,7 @@ public class App {
             // Extract population information
             rset.next();
             long districtPop = rset.getLong(1);
-            
+
             String districtPopString = district + "'s population is " + districtPop;
             return districtPopString;
 
@@ -797,7 +826,7 @@ public class App {
             System.out.println(e.getMessage());
             System.out.println("Failed to get city details");
             return null;
-        }  
+        }
     }
 
     public String cityPopulation(String city) {
@@ -821,7 +850,7 @@ public class App {
             // Extract population information
             rset.next();
             long cityPop = rset.getLong(1);
-            
+
             String cityPopString = city + "'s population is " + cityPop;
             return cityPopString;
 
@@ -829,6 +858,42 @@ public class App {
             System.out.println(e.getMessage());
             System.out.println("Failed to get city details");
             return null;
-        }  
+        }
+    }
+
+    public ArrayList<Language> languageReport() {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    " SELECT Language, "
+                        + " ROUND(SUM((Population/100) * Percentage)) AS Speakers, "
+                        + " ROUND(((SUM((Population/100) * Percentage)) / (SELECT SUM(Population) FROM country)) * 100, 2) AS 'Percentage of World Population' "
+                        + " FROM countrylanguage, country "
+                        + " WHERE countrylanguage.CountryCode = country.Code "
+                        + " GROUP BY Language "
+                        + " ORDER BY ROUND(SUM((Population/100) * Percentage)) DESC "
+                        + " LIMIT 5 ";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract population information
+            ArrayList<Language> languageReports = new ArrayList<Language>();
+
+            while (rset.next()) {
+                Language languageReport = new Language();
+                languageReport.Language = rset.getString("Language");
+                languageReport.Speakers = rset.getInt("Speakers");
+                languageReport.PercentageOfWorldPopulation = rset.getDouble("Percentage of World Population");
+                languageReports.add(languageReport);
+            }
+            return languageReports;
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get language details");
+            return null;
+        }
     }
 }
