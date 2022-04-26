@@ -50,10 +50,10 @@ Welcome to our README file
 | 23    | The population of people, people living in cities, and people not living in cities in each continent. | Yes |   |
 | 24    | The population of people, people living in cities, and people not living in cities in each region. | Yes |  |
 | 25    | The population of people, people living in cities, and people not living in cities in each country. | Yes |  |
-| 26    | The population of the world. | Yes |   |
-| 27    | The population of a continent. | Yes |  |
-| 28    | The population of a region. | Yes |  |
+| 26    | The population of the world. | Yes |![Code26](https://github.com/40440665/SEM_CW/blob/feature/language-reports/screenshots/26.png)|
+| 27    | The population of a continent. | Yes |![Code27](https://github.com/40440665/SEM_CW/blob/feature/language-reports/screenshots/27.png)|
+| 28    | The population of a region. | Yes |![Code28](https://github.com/40440665/SEM_CW/blob/feature/language-reports/screenshots/28.png)|
 | 29    | The population of a country. | Yes |   |
-| 30    | The population of a district. | Yes |  |
-| 31    | The population of a city. | Yes |  |
+| 30    | The population of a district. | Yes |![Code30](https://github.com/40440665/SEM_CW/blob/feature/language-reports/screenshots/30.png)|
+| 31    | The population of a city. | Yes |![Code31](https://github.com/40440665/SEM_CW/blob/feature/language-reports/screenshots/31.png)|
 | 32    | The number of people who speak Chinese, English, Hindi, Spanish and Arabic from greatest to smallest, including the percentage of the world population who speak them | Yes |![Code32](https://github.com/40440665/SEM_CW/blob/feature/language-reports/screenshots/32.png)|
