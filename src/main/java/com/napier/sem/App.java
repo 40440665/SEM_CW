@@ -703,7 +703,7 @@ public class App {
             while (rset.next()) {
                 CapitalCity capitalCity = new CapitalCity();
                 capitalCity.Name = rset.getString("Name");
-                capitalCity.Country = rset.getString("CountryCode");
+                capitalCity.Country = rset.getString("Country");
                 capitalCity.Population = rset.getInt("Population");
                 capitalCities.add(capitalCity);
             }
@@ -731,9 +731,12 @@ public class App {
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT Name, CountryCode, Population "
-                            + " FROM city "
-                            + " ORDER BY Population DESC";
+                     "SELECT city.Name AS Name, country.Name AS Country, city.Population "
+                        + " FROM city, country "
+                        + " WHERE city.CountryCode = country.code "
+                        + " AND city.ID IN (SELECT capital FROM country ) "
+                        + " AND country.Region = '" + region + "' "
+                        + " ORDER BY Population DESC ";
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -742,7 +745,7 @@ public class App {
             while (rset.next()) {
                 CapitalCity capitalCity = new CapitalCity();
                 capitalCity.Name = rset.getString("Name");
-                capitalCity.Country = rset.getString("CountryCode");
+                capitalCity.Country = rset.getString("Country");
                 capitalCity.Population = rset.getInt("Population");
                 capitalCities.add(capitalCity);
             }
@@ -792,7 +795,7 @@ public class App {
             while (rset.next()) {
                 CapitalCity capitalCity = new CapitalCity();
                 capitalCity.Name = rset.getString("Name");
-                capitalCity.Country = rset.getString("CountryCode");
+                capitalCity.Country = rset.getString("Country");
                 capitalCity.Population = rset.getInt("Population");
                 capitalCities.add(capitalCity);
             }
@@ -842,7 +845,7 @@ public class App {
             while (rset.next()) {
                 CapitalCity capitalCity = new CapitalCity();
                 capitalCity.Name = rset.getString("Name");
-                capitalCity.Country = rset.getString("CountryCode");
+                capitalCity.Country = rset.getString("Country");
                 capitalCity.Population = rset.getInt("Population");
                 capitalCities.add(capitalCity);
             }
