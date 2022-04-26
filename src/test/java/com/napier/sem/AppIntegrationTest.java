@@ -164,4 +164,91 @@ public class AppIntegrationTest
         assertEquals(cities.get(0).District , "Île-de-France");
         assertEquals(cities.get(0).Population , 2125246);
     }
+
+    /**
+     * Tests the worldPopulation method
+     *
+     * The method should return the population of the world
+     */
+    @Test
+    void testWorldPopulation()
+    {
+        String worldPop = app.worldPopulation();
+        assertEquals(worldPop, "World Population is ");
+   }
+
+    /**
+     * Tests the continentPopulation method
+     *
+     * The method should return the population details of the continent Europe
+     */
+    @Test
+    void testContinentPopulation()
+    {
+        Population report = app.continentPopulation("Europe");
+        assertEquals(report.Name, "Europe");
+        assertEquals(report.Population, 1243);
+        assertEquals(report.PopulationInCities, 123);
+        assertEquals(report.PercentInCities , 2125246);
+        assertEquals(report.PopulationNotInCities, 123);
+        assertEquals(report.PercentNotInCities, 123);
+    }
+
+    /**
+     * Tests the regionPopulation method
+     *
+     * The method should return the population details of the region Caribbean
+     */
+    @Test
+    void testRegionPopulation()
+    {
+        Population report = app.regionPopulation("Caribbean");
+        assertEquals(report.Name, "Caribbean");
+        assertEquals(report.Population, 1243);
+        assertEquals(report.PopulationInCities, 123);
+        assertEquals(report.PercentInCities , 2125246);
+        assertEquals(report.PopulationNotInCities, 123);
+        assertEquals(report.PercentNotInCities, 123);
+    }
+
+    /**
+     * Tests the countryPopulation method
+     *
+     * The method should return the population details of the country France
+     */
+    @Test
+    void testCountryPopulation()
+    {
+        Population report = app.countryPopulation("France");
+        assertEquals(report.Name, "France");
+        assertEquals(report.Population, 1243);
+        assertEquals(report.PopulationInCities, 123);
+        assertEquals(report.PercentInCities , 2125246);
+        assertEquals(report.PopulationNotInCities, 123);
+        assertEquals(report.PercentNotInCities, 123);
+    }
+
+    /**
+     * Tests the districtPopulation method
+     *
+     * The method should return the population of the district Zuid-Holland
+     */
+    @Test
+    void testDistrictPopulation()
+    {
+        String districtPop = app.districtPopulation("Zuid-Holland");
+        assertEquals(districtPop, "Zuid-Holland's population is ");
+    }
+
+    /**
+     * Tests the districtPopulation method
+     *
+     * The method should return the population of the district Zuid-Holland
+     */
+    @Test
+    void testCityPopulation()
+    {
+        String cityPop = app.cityPopulation("Paris");
+        assertEquals(cityPop, "Paris's population is ");
+    }
 }
