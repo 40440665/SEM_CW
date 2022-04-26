@@ -5,8 +5,8 @@ public class CapitalCity {
         //Capital City Name
         public String Name;
 
-        //Country Code
-        public String CountryCode;
+        //Country Name
+        public String Country;
 
         //Population
         public int Population;

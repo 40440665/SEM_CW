@@ -48,10 +48,15 @@ public class App {
         //ArrayList<City> cities = Test.nPopulatedCitiesInADistrict(6, "California");
 
         //Display top N populated cities in a country
-        ArrayList<City> cities = Test.nPopulatedCitiesInACountry(3, "France");
+        //ArrayList<City> cities = Test.nPopulatedCitiesInACountry(3, "France");
+
+        ArrayList<CapitalCity> capitalCities = Test.capitalCitiesByPopulation();
 
         //Print the cities
-        Test.printCities(cities);
+        //Test.printCities(cities);
+
+        //Print the cities
+        Test.printCapitalCities(capitalCities);
 
         //Disconnect from database
         Test.disconnect();
@@ -140,6 +145,38 @@ public class App {
                     String.format("%-40s %-15s %-20s %-8s",
                             city.Name, city.CountryCode, city.District, city.Population);
             System.out.println(city_string);
+        }
+    }
+
+    /**
+     * Prints a list of capital cities
+     *
+     * @param capitalCities The list of capital cities to print
+     */
+    public void printCapitalCities(ArrayList<CapitalCity> capitalCities) {
+
+        // Check cities is not null
+        if (capitalCities == null)
+        {
+            System.out.println("No capital cities");
+            return;
+        }
+
+        // Print header
+        System.out.println(String.format("%-40s %-15s %-8s", "Name", "Country", "Population"));
+
+        // Loop over all capital cities in the list
+        for (CapitalCity capitalCity : capitalCities) {
+            if (capitalCity == null)
+            {
+                continue;
+            }
+
+            //Formatting the rows that will come under the header
+            String capital_city_string =
+                    String.format("%-40s %-15s %-8s",
+                            capitalCity.Name, capitalCity.Country, capitalCity.Population);
+            System.out.println(capital_city_string);
         }
     }
 
@@ -610,10 +647,12 @@ public class App {
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
-            String strSelect =
-                    "SELECT Name, CountryCode, Population "
-                            + " FROM city "
-                            + " ORDER BY Population DESC";
+            String strSelect =   
+                    "SELECT city.Name AS Name, country.Name AS Country, city.Population "
+                        + " FROM city, country "
+                        + " WHERE city.CountryCode = country.code "
+                        + " AND city.ID IN (SELECT capital FROM country) "
+                        + " ORDER BY Population DESC";
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -622,7 +661,7 @@ public class App {
             while (rset.next()) {
                 CapitalCity capitalCity = new CapitalCity();
                 capitalCity.Name = rset.getString("Name");
-                capitalCity.CountryCode = rset.getString("CountryCode");
+                capitalCity.CountryCode = rset.getString("Country");
                 capitalCity.Population = rset.getInt("Population");
                 capitalCities.add(capitalCity);
             }
