@@ -50,7 +50,7 @@ public class App {
         //Display top N populated cities in a country
         //ArrayList<City> cities = Test.nPopulatedCitiesInACountry(3, "France");
 
-        ArrayList<CapitalCity> capitalCities = Test.capitalCitiesByContinent("Europe");
+        ArrayList<CapitalCity> capitalCities = Test.capitalCitiesByRegion("Caribbean");
 
         //Print the cities
         //Test.printCities(cities);
