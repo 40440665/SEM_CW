@@ -661,7 +661,7 @@ public class App {
             while (rset.next()) {
                 CapitalCity capitalCity = new CapitalCity();
                 capitalCity.Name = rset.getString("Name");
-                capitalCity.CountryCode = rset.getString("Country");
+                capitalCity.Country = rset.getString("Country");
                 capitalCity.Population = rset.getInt("Population");
                 capitalCities.add(capitalCity);
             }
@@ -700,7 +700,7 @@ public class App {
             while (rset.next()) {
                 CapitalCity capitalCity = new CapitalCity();
                 capitalCity.Name = rset.getString("Name");
-                capitalCity.CountryCode = rset.getString("CountryCode");
+                capitalCity.Country = rset.getString("CountryCode");
                 capitalCity.Population = rset.getInt("Population");
                 capitalCities.add(capitalCity);
             }
@@ -739,7 +739,7 @@ public class App {
             while (rset.next()) {
                 CapitalCity capitalCity = new CapitalCity();
                 capitalCity.Name = rset.getString("Name");
-                capitalCity.CountryCode = rset.getString("CountryCode");
+                capitalCity.Country = rset.getString("CountryCode");
                 capitalCity.Population = rset.getInt("Population");
                 capitalCities.add(capitalCity);
             }
@@ -789,7 +789,7 @@ public class App {
             while (rset.next()) {
                 CapitalCity capitalCity = new CapitalCity();
                 capitalCity.Name = rset.getString("Name");
-                capitalCity.CountryCode = rset.getString("CountryCode");
+                capitalCity.Country = rset.getString("CountryCode");
                 capitalCity.Population = rset.getInt("Population");
                 capitalCities.add(capitalCity);
             }
@@ -839,7 +839,7 @@ public class App {
             while (rset.next()) {
                 CapitalCity capitalCity = new CapitalCity();
                 capitalCity.Name = rset.getString("Name");
-                capitalCity.CountryCode = rset.getString("CountryCode");
+                capitalCity.Country = rset.getString("CountryCode");
                 capitalCity.Population = rset.getInt("Population");
                 capitalCities.add(capitalCity);
             }
