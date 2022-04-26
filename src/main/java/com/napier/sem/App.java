@@ -93,7 +93,7 @@ public class App {
         //Population populationReport = Test.regionPopulation("Caribbean");
 
         //Display the population statistics of a country
-        Population populationReport = Test.countryPopulation("Spain");
+        Population populationReport = Test.countryPopulation("FRA");
 
         //Display the population statistics of a district
         //String districtPop = Test.districtPopulation("California");
@@ -1135,10 +1135,10 @@ public class App {
             // Create string for SQL statement
             String strSelect =
                     " SELECT Name, Population, "
-                            + " (SELECT SUM(city.Population) FROM city WHERE countryCode = '" + country + "') AS 'Population Living in Cities', "
-                            + " ROUND(((SELECT SUM(city.Population) FROM city WHERE CountryCode = '" + country + "') / Population)*100,1) AS 'Percentage of Population Living in Cities', "
-                            + " (Population - (SELECT SUM(population) FROM city WHERE countryCode = '" + country + "')) AS 'Population not Living in Cities', "
-                            + " ROUND(((Population - (SELECT SUM(city.Population) FROM city WHERE countryCode = '" + country + "')) / Population)*100, 1) AS 'Percentage of Population not Living in Cities' "
+                            + " (SELECT SUM(Population) FROM city WHERE CountryCode = '" + country + "') AS 'Population Living in Cities', "
+                            + " ROUND(((SELECT SUM(Population) FROM city WHERE CountryCode = '" + country + "') / Population)*100,1) AS 'Percentage of Population Living in Cities', "
+                            + " (Population - (SELECT SUM(population) FROM city WHERE CountryCode = '" + country + "')) AS 'Population not Living in Cities', "
+                            + " ROUND(((Population - (SELECT SUM(Population) FROM city WHERE countryCode = '" + country + "')) / Population)*100, 1) AS 'Percentage of Population not Living in Cities' "
                             + " FROM country WHERE Code = '" + country + "' ";
 
             // Execute SQL statement
