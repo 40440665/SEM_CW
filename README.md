@@ -41,12 +41,12 @@ Welcome to our README file
 | 14    | The top N populated cities in a region where N is provided by the user. | Yes |![Code14](https://github.com/40440665/SEM_CW/blob/feature/language-reports/screenshots/14.png)|
 | 15    | The top N populated cities in a country where N is provided by the user. | Yes |![Code15](https://github.com/40440665/SEM_CW/blob/feature/language-reports/screenshots/15.png)|
 | 16    | The top N populated cities in a district where N is provided by the user. | Yes |![Code16](https://github.com/40440665/SEM_CW/blob/feature/language-reports/screenshots/16.png)|
-| 17    | All the capital cities in the world organised by largest population to smallest. | Yes |   |
-| 18    | All the capital cities in a continent organised by largest population to smallest. | Yes |  |
-| 19    | All the capital cities in a region organised by largest to smallest. | Yes |  |
-| 20    | The top N populated capital cities in the world where N is provided by the user. | Yes |   |
-| 21    | The top N populated capital cities in a continent where N is provided by the user. | Yes |  |
-| 22    | The top N populated capital cities in a region where N is provided by the user. | Yes |  |
+| 17    | All the capital cities in the world organised by largest population to smallest. | Yes |![Code17-1](https://github.com/40440665/SEM_CW/blob/feature/language-reports/screenshots/17-1.png) __...__ ![Code17-2](https://github.com/40440665/SEM_CW/blob/feature/language-reports/screenshots/17-2.png)|
+| 18    | All the capital cities in a continent organised by largest population to smallest. | Yes |![Code18-1](https://github.com/40440665/SEM_CW/blob/feature/language-reports/screenshots/18-1.png) __...__ ![Code18-2](https://github.com/40440665/SEM_CW/blob/feature/language-reports/screenshots/18-2.png)|
+| 19    | All the capital cities in a region organised by largest to smallest. | Yes |![Code19](https://github.com/40440665/SEM_CW/blob/feature/language-reports/screenshots/19.png)|
+| 20    | The top N populated capital cities in the world where N is provided by the user. | Yes |![Code20](https://github.com/40440665/SEM_CW/blob/feature/language-reports/screenshots/20.png)|
+| 21    | The top N populated capital cities in a continent where N is provided by the user. | Yes |![Code21](https://github.com/40440665/SEM_CW/blob/feature/language-reports/screenshots/21.png)|
+| 22    | The top N populated capital cities in a region where N is provided by the user. | Yes |![Code22](https://github.com/40440665/SEM_CW/blob/feature/language-reports/screenshots/22.png)|
 | 23    | The population of people, people living in cities, and people not living in cities in each continent. | Yes |   |
 | 24    | The population of people, people living in cities, and people not living in cities in each region. | Yes |  |
 | 25    | The population of people, people living in cities, and people not living in cities in each country. | Yes |  |
