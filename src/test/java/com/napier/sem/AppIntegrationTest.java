@@ -322,7 +322,7 @@ public class AppIntegrationTest
         assertEquals(capitalCities.get(0).Name, "La Habana");
         assertEquals(capitalCities.get(0).Country, "Cuba");
         assertEquals(capitalCities.get(0).Population , 2256000);
-    }         
+    }
 
 
     /**
@@ -337,7 +337,7 @@ public class AppIntegrationTest
         assertEquals(capitalCities.get(0).Name, "Seoul");
         assertEquals(capitalCities.get(0).Country, "South Korea");
         assertEquals(capitalCities.get(0).Population , 9981619);
-    }                                     
+    }
 
     /**
      * Tests the nPopulatedCapitalCitiesInAContinent method
@@ -365,7 +365,7 @@ public class AppIntegrationTest
         assertEquals(capitalCities.get(0).Name, "La Habana");
         assertEquals(capitalCities.get(0).Country, "Cuba");
         assertEquals(capitalCities.get(0).Population , 2256000);
-    }        
+    }
 
 
 
@@ -380,8 +380,8 @@ public class AppIntegrationTest
     void testWorldPopulation()
     {
         String worldPop = app.worldPopulation();
-        assertEquals(worldPop, "World Population is 6078749450");
-   }
+        assertEquals(worldPop, "World population is 6078749450");
+    }
 
     /**
      * Tests the continentPopulation method
@@ -425,7 +425,7 @@ public class AppIntegrationTest
     @Test
     void testCountryPopulation()
     {
-        Population report = app.countryPopulation("France");
+        Population report = app.countryPopulation("FRA");
         assertEquals(report.Name, "France");
         assertEquals(report.Population, 59225700);
         assertEquals(report.PopulationInCities, 9244494);
@@ -458,10 +458,8 @@ public class AppIntegrationTest
         assertEquals(cityPop, "Paris's population is 2125246");
     }
 
-
-
     // LANGUAGE REPORT TEST
-    
+
     /**
      * Tests the languageReport method
      *
@@ -470,7 +468,7 @@ public class AppIntegrationTest
     @Test
     void testLanguageReport()
     {
-        Arraylist<Language> languageReport = app.languageReport();
+        ArrayList<Language> languageReport = app.languageReport();
         assertEquals(languageReport.get(0).Language, "Chinese");
         assertEquals(languageReport.get(0).Speakers, 1191843539);
         assertEquals(languageReport.get(0).PercentageOfWorldPopulation , 19.61);

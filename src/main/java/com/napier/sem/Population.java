@@ -13,7 +13,7 @@ public class Population {
     public int PopulationInCities;
 
     //Percentage of Population living in cities
-    public double PercentInCities; 
+    public double PercentInCities;
 
     //Population not living in cities
     public int PopulationNotInCities;
